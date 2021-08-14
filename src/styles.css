@@ -97,7 +97,7 @@
 .menu-toggle .bar{
     width: 25px;
     height: 3px;
-    background-color: #3f3f3f;
+    background-color: #FFF;
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
@@ -150,15 +150,19 @@
         flex-direction: column;
         position: fixed;
         justify-content: start;
-        top: 100px;
+        top: 0;
         left: 0;
         background-color: #fff;
         width: 100%;
         gap: 20px;
-        height: calc(100vh - 100px);
+        height: 100vh;
         transform: translate(-101%);
         text-align: center;
         overflow: hidden;
+    }
+
+    .nav-item a {
+        color: #000;
     }
     
     .navbar li {
@@ -166,7 +170,7 @@
     }
     
     .navbar li:first-child {
-        margin-top: 50px;
+        margin-top: 150px;
     }
     
     .navbar li a {
