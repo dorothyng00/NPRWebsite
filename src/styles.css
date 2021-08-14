@@ -84,6 +84,16 @@
     color: var(--darkorange);
 }
 
+.nav-item-black a {
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+}
+
+.nav-item-black a:hover {
+    color: var(--darkorange);
+}
+
 .menu-toggle .bar{
     width: 25px;
     height: 3px;
