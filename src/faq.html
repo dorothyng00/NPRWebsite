@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FAQ | North Point Realty</title>
+        <link rel="icon" href="assets/logo-white-simple.png" type="image">
+        
+        <link rel="stylesheet" href="tailwind.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <script src="vue.js"></script>
+        <!-- <script src="vue.min.js"></script> -->
+    </head>
+    <body>
+        <div id="vue-home">
+            <div id="nav-bar"></div>
+            <div class="w-full">
+                <div class="container mx-auto">
+                    <div style="padding: 5%;">
+                        <div class="w-full md:w-1/2 py-10">
+                            <h1 class="xl-font-size headerFont" style="color: #000000;">
+                                FAQ
+                            </h1>
+                            <div class="mt-3 sm-font-size bodyFont" style="color: #000000;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque.
+                            </div>
+                        </div>
+
+                        <!-- <div class="mt-8 flex faq-tabs-section bodyFont" style="color: #000000;">
+                            <div class="faq-tabs active" onclick="changeFaqTabEvent(event, 'faq-1')">cat name</div>
+                            <div class="faq-tabs" onclick="changeFaqTabEvent(event, 'faq-2')">cat name</div>
+                        </div> -->
+        
+                        <div id="faq-1" class="faq-tab-content mt-10">
+                            <dl class="accordion-dropdown expandable bodyFont" style="color: #000000;">
+                                <dt class="px-5 py-4 sm-font-size">Why North Point Realty?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    We save you time, money, and hassle. With years of experience managing properties in the GTA, we can offer you the best advice about leasing in your investment area. We’ll help you increase revenue by keeping your property rented at the highest rate in the area.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">How do you screen your tenants?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    All of our tenants are prescreened ahead of time by our Leasing Department. Tenants are able to provide necessary documentation such as full credit reports, employment letters, income verification, previous landlord references, etc. We strive to provide the highest quality tenant that will take care of your investment.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">How do you know what my property is worth?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    Our knowledge in the GTA rental market is able to accurately appraise any property in every area. We also look at comparable units in your building and area. With our tenants' budgets in mind we are able to help you get the highest market value for your property.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">Where do you service?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    We specialize in Toronto. However, our services cover the Halton, Peel, York, and Durham region.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">How much do you charge for tenant placement?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    We charge a standard fee of one month's rent out of the year for leasing out your property. This fee is not due until the lease agreement is signed by our tenant and you receive both first and last month's rent deposit.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">Will I be able to see/speak to the tenant?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    Of course! Before you accept an offer from any of our applicants, you are able to request a virtual meeting via Zoom or Google Meet.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">How long is your Tenant Placement Service Agreement?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    Our contract period is only 15 days. If we cannot find you a tenant within that timeframe, our agreement terminates.
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">How much do you charge for Property Management?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    We provide different service packages for property management.<br><br>
+                                    Our Silver package highlights Tenant Guarantee (cost: 2% monthly rent).<br><br>
+                                    Our Gold package (most popular) highlights the core of our property management service (cost 5% monthly rent).<br><br>
+                                    Our Platinum package highlights FREE tenant placement every single year (cost: 8% monthly rent).
+                                </dd>
+
+                                <dt class="px-5 py-4 sm-font-size">What happens at the end of the lease period?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size">
+                                    At the end of the lease period, if our tenant decides to stay, we do not charge you for subsequent years. If you are under property management, we are able to help you find another tenant without any vacancies.
+                                </dd>
+                            </dl>
+                        </div>
+                        
+                        <!-- <div id="faq-2" class="faq-tab-content mt-10" style="display: none;">
+                            <dl class="accordion-dropdown expandable bodyFont">
+                                <dt class="px-5 py-4 sm-font-size" style="color:#000000;">item title<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></dt>
+                                <dd class="p-5 sm-font-size" style="color: #000000;">item body</dd>			
+                            </dl>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="navbar.js"></script>
+        <script src="script.js"></script>
+        
+        <script>
+            new Vue({
+                el: '#vue-home',
+                data:{
+                    showMenu: false
+                },
+                methods:{
+                    toggleMenu(){
+                        this.showMenu = !this.showMenu
+                    },
+                    navigateHome(){
+                        location.href='/'
+                    }
+                },
+                computed:{
+
+                },
+                mounted(){
+
+                },
+                created(){
+
+                }
+            })
+        </script>
+
+        <script src="jquery.js"></script>
+        <script src="faq.js"></script>
+    </body>
+</html>

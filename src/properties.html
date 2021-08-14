@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Properties | North Point Realty</title>
+        <link rel="icon" href="assets/logo-white-simple.png" type="image">
+        
+        <link rel="stylesheet" href="tailwind.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <script src="vue.js"></script>
+        <!-- <script src="vue.min.js"></script> -->
+    </head>
+    <body>
+        <div id="vue-home">
+            <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
+        </div>
+
+        <script src="navbar.js"></script>
+        <script src="script.js"></script>
+        
+        <script>
+            new Vue({
+                el: '#vue-home',
+                data:{
+                    showMenu: false
+                },
+                methods:{
+                    toggleMenu(){
+                        this.showMenu = !this.showMenu
+                    },
+                    navigateHome(){
+                        location.href='/'
+                    }
+                },
+                computed:{
+
+                },
+                mounted(){
+
+                },
+                created(){
+
+                }
+            })
+        </script>
+    </body>
+</html>

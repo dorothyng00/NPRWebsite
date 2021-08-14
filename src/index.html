@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home | North Point Realty</title>
+        <link rel="icon" href="assets/logo-white-simple.png" type="image">
+        
+        <link rel="stylesheet" href="tailwind.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="slider-menu.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+        <script src="vue.js"></script>
+        <!-- <script src="vue.min.js"></script> -->
+    </head>
+    <body>
+        <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo. -->
+        <div id="vue-home" class="relative w-full h-full">
+            <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
+            <div class="hero-img-card">
+                <img src="https://cdn.bildhive.com/noinstace/8f430edb50f94fe19b4b17b6ff45c1a3.png" class="hero-img-cover" />
+            </div>
+        </div>
+
+        <script src="navbar.js"></script>
+        <script src="script.js"></script>
+        
+        <script>
+            new Vue({
+                el: '#vue-home',
+                data:{
+                    showMenu: false
+                },
+                methods:{
+                    toggleMenu(){
+                        this.showMenu = !this.showMenu
+                    },
+                    navigateHome(){
+                        location.href='/'
+                    }
+                },
+                computed:{
+
+                },
+                mounted(){
+
+                },
+                created(){
+
+                }
+            })
+        </script>
+    </body>
+</html>
