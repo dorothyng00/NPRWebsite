@@ -19,8 +19,13 @@
         <div id="vue-home" class="relative w-full h-full">
             <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
             <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
-                <div class="hero-img-card">
-                    <img src="https://cdn.bildhive.com/noinstace/8f430edb50f94fe19b4b17b6ff45c1a3.png" class="hero-img-cover" />
+                <div class="hero-img-card relative">
+                    <div class="absolute w-full h-full" style="z-index: 2; color:white">
+                        <div class="flex w-full h-full justify-center items-center">
+                            <div class="w-4/5 md:w-1/2 heroHeaderFont xl-font-size text-center">Specialists in Property Management & Tenant Placement</div>
+                        </div>
+                    </div>
+                    <img src="/assets/hero-placeholder.jpeg" class="hero-img-cover" />
                 </div>
                 <div class="py-10">
                     <div class="sm-padding-y container mx-auto">
