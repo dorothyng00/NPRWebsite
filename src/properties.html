@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full">
+            <div class="w-full" :style="[showMenu ? {'overflow':'hidden', 'max-height':'calc(100vh - 100px)'} : {'':''}]">
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
                         <h1 class="headerFont xl-font-size">Available Properties</h1>
@@ -143,8 +143,8 @@
                         </div>
                     </div>
                 </div>
+                <div id="footer"></div>
             </div>
-            <div id="footer"></div>
         </div>
 
         <script src="navbar-black.js"></script>

@@ -14,8 +14,10 @@
     </head>
     <body>
         <div id="vue-home">
-            <div id="nav-bar"></div>
-            <div id="footer"></div>
+            <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
+            <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
+                <div id="footer"></div>
+            </div>
         </div>
 
         <script src="navbar-black.js"></script>

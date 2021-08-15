@@ -15,7 +15,7 @@
     <body>
         <div id="vue-home">
             <div id="nav-bar"></div>
-            <div class="w-full">
+            <div class="w-full" :style="[showMenu ? {'overflow':'hidden', 'max-height':'calc(100vh - 100px)'} : {'':''}]">
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
                         <div class="w-full md:w-1/2 py-10">
@@ -36,11 +36,10 @@
                                 </template>
                             </dl>
                         </div>
-
                     </div>
                 </div>
+                <div id="footer"></div>
             </div>
-            <div id="footer"></div>
         </div>
 
         <script src="navbar-black.js"></script>
