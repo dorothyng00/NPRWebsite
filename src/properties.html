@@ -15,13 +15,30 @@
     <body>
         <div id="vue-home">
             <div id="nav-bar"></div>
+            <div v-if="showDetails.visible" class="fixed w-screen h-screen hidden items-center justify-center top-0 left-0" :class="showDetails.visible ? 'isActive' : 'notActive'" style="z-index: 200;">
+                <div class="relative w-full h-full flex justify-center items-center">
+                    <div @click="closeViewDetails()" class="absolute w-full h-full details-mask-overlay"></div>
+                    <div class="relative w-full h-full md:w-3/4 md:h-5/6 details-page">
+                        <div class="flex items-center justify-between xl-font-size headerFont">
+                            TEST
+                            <button @click="closeViewDetails()" class="text-gray-500">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-8 w-8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <hr class="mt-5" style="border-top: 3px solid black;" />
+                        asfasf
+                    </div>
+                </div>
+            </div>
             <div class="w-full">
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
-                        <h1 class="py-10 headerFont xl-font-size">Available Properties</h1>
+                        <h1 class="headerFont xl-font-size">Available Properties</h1>
                         <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-14 sm:gap-16 lg:gap-20">
                             <template v-for="(prop,propI) in properties">
-                                <div class="w-full">
+                                <div @click="updateShowDetails(prop)" class="w-full">
                                     <div class="img-holder-box">
                                         <img class="img-cover" src="/assets/properties/placeholder.jpg" />
                                     </div>
@@ -48,6 +65,10 @@
                 el: '#vue-home',
                 data:{
                     showMenu: false,
+                    showDetails:{
+                        visible:false,
+                        property:{}
+                    },
                     properties:[
                         {
                             image:'',
@@ -57,13 +78,18 @@
                             price:'',
                             description:'',
                             date:'',
-                            exposure:'',
                             furnished:false,
                             utilities:{
-
+                                heat:false,
+                                water:false,
+                                hydro:false,
+                                internet:false
                             },
                             features:{
-
+                                bed:0,
+                                bath:0,
+                                sqft:0,
+                                exposure:'',
                             },
                             agreementType:'',
                         },
@@ -75,6 +101,14 @@
                     },
                     navigateHome(){
                         location.href='/src/'
+                    },
+                    closeViewDetails(){
+                        this.showDetails.visible = false
+				        this.showDetails.property = {}
+                    },
+                    updateShowDetails(obj){
+                        this.showDetails.property = obj
+                        this.showDetails.visible = true
                     }
                 },
                 computed:{

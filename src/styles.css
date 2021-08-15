@@ -54,7 +54,7 @@
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
     background-color: var(--white);
 }
 
@@ -512,4 +512,28 @@ dt.expanded {
 }
 .img-holder-box:hover .img-cover {
     transform:scale(1.1);
+}
+
+
+
+/* Modal Classes */
+.details-mask-overlay {
+    background: rgba(0,0,0,0.6);
+    z-index: 101;
+    overflow: hidden;
+}
+.details-page {
+    background-color: var(--white);
+    z-index: 102;
+    overflow-y: scroll;
+    padding: 5%;
+}
+.isActive {
+    display: flex !important;
+}
+.notActive {
+    display: none !important;
+}
+.selectFilter:focus-visible {
+    outline: none;
 }
