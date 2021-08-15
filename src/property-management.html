@@ -18,18 +18,22 @@
             <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
                 <div class="hero-img-card relative">
                     <div class="absolute w-full h-full" style="z-index: 2; color:white">
-                        <div class="flex w-full h-full justify-center items-center">
-                            <div class="w-4/5 md:w-1/2 heroHeaderFont xl-font-size text-center">Property Management</div>
+                        <div class="mx-auto container w-full h-full">
+                            <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
+                                <div class="w-full md:w-1/2">
+                                    <div class="xl-font-size heroHeaderFont">Property Management</div>
+                                    <div class="sm-font-size bodyFont mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <img src="/assets/hero-placeholder.jpeg" class="hero-img-cover" />
+                    <img src="/assets/hero-placeholder2.jpg" class="hero-img-cover" />
                 </div>
                 <div class="lg-padding-y">
                     <div class="my-5 container mx-auto">
                         <div style="padding-right:5%; padding-left:5%">
-                            <!-- <div class="text-center mb-10 md:mb-20 xl-font-size headerFont">
-                                Property Management
-                            </div> -->
+                            <div class="text-center xl-font-size headerFont">Lorem ipsum dolor sit amet</div>
+                            <div class="text-center sm-font-size bodyFont mb-10 md:mb-20 mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                             <div class="flex">
                                 <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid #000">
                                     <i style="font-size:30px" class="fas fa-address-card"></i>
@@ -91,6 +95,103 @@
                                 <div class="ml-3 flex-1">
                                     <div class="md-font-size bodyFont">Tenant Guarantee</div>
                                     <div>If the tenant we provide were to ever break the lease within the lease term, we guarantee another qualified tenant free of charge.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg-padding-y" style="background-color: var(--offwhite);">
+                    <div class="container mx-auto">
+                        <div style="padding:0 5%;">
+                            <div class="lg-font-size bodyFont text-center">Select your plan</div>
+                            <div class="sm-font-size bodyFont text-center mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                            <div class="flex" style="margin-top: 150px;">
+                                <div class="relative" style="border-radius: 7px; border:solid 1px #000">
+                                    <div class="absolute w-full" style="margin-top:-100px">
+                                        <div class="flex justify-center items-center">
+                                            <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:var(--gray); padding:20px">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <div class="bodyFont sm-font-size text-center">Silver Plan</div>
+                                                        <div class="bodyFont xxl-font-size text-center">2%</div>
+                                                        <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-7" style="padding-top:120px">
+                                        <div class="flex items-center">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
+                                        </div>
+                                        <div class="flex items-center mt-3">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                        </div>
+                                        <div class="flex items-center mt-3 mb-3">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                        </div>
+                                        <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
+                                            <button class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative" style="border-radius: 7px; border:solid 1px #000">
+                                    <div class="absolute w-full" style="margin-top:-100px">
+                                        <div class="flex justify-center items-center">
+                                            <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:#f6b221; padding:20px">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <div class="bodyFont sm-font-size text-center">Gold Plan</div>
+                                                        <div class="bodyFont xxl-font-size text-center">5%</div>
+                                                        <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-7" style="padding-top:120px">
+                                        <div class="flex items-center">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
+                                        </div>
+                                        <div class="flex items-center mt-3">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                        </div>
+                                        <div class="flex items-center mt-3 mb-3">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                        </div>
+                                        <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
+                                            <button class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative" style="border-radius: 7px; border:solid 1px #000">
+                                    <div class="absolute w-full" style="margin-top:-100px">
+                                        <div class="flex justify-center items-center">
+                                            <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:#e5e4e2; padding:20px">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <div class="bodyFont sm-font-size text-center">Platinum Plan</div>
+                                                        <div class="bodyFont xxl-font-size text-center">8%</div>
+                                                        <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-7" style="padding-top:120px">
+                                        <div class="flex items-center">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
+                                        </div>
+                                        <div class="flex items-center mt-3">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                        </div>
+                                        <div class="flex items-center mt-3 mb-3">
+                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                        </div>
+                                        <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
+                                            <button class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

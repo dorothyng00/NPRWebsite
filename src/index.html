@@ -21,11 +21,17 @@
             <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
                 <div class="hero-img-card relative">
                     <div class="absolute w-full h-full" style="z-index: 2; color:white">
-                        <div class="flex w-full h-full justify-center items-center">
-                            <div class="w-4/5 md:w-1/2 heroHeaderFont xl-font-size text-center">Specialists in Property Management & Tenant Placement</div>
+                        <div class="mx-auto container w-full h-full">
+                            <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
+                                <div class="w-full md:w-1/2">
+                                    <div class="xl-font-size heroHeaderFont">Specialists in Property Management & Tenant Placement</div>
+                                    <div class="sm-font-size bodyFont mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                    <button onclick="document.location = '/src/properties.html'" class="solidButton py-2 px-5 mt-5">View Available Properties</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <img src="/assets/hero-placeholder.jpeg" class="hero-img-cover" />
+                    <img src="/assets/hero-placeholder2.jpg" class="hero-img-cover" />
                 </div>
                 <div class="py-10">
                     <div class="sm-padding-y container mx-auto">
