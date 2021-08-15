@@ -16,15 +16,16 @@
         <div id="vue-home">
             <div id="nav-bar"></div>
             <div v-if="showDetails.visible" class="fixed w-screen h-screen hidden items-center justify-center top-0 left-0" :class="showDetails.visible ? 'isActive' : 'notActive'" style="z-index: 200;">
-                <div class="relative w-full h-full flex justify-center items-center">
+                <div class="w-full h-full flex justify-center items-center">
                     <div @click="closeViewDetails()" class="absolute w-full h-full details-mask-overlay"></div>
                     <div class="relative w-full h-full md:w-3/5 md:h-5/6 details-page">
-                        <button @click="closeViewDetails()" class="absolute right-5 top-5 text-gray-500">
+                        <button @click="closeViewDetails()" style="color: var(--black);" class="fixed">
                             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-8 w-8">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </button>
-                        <div v-if="showDetails.property">
+                        
+                        <div v-if="showDetails.property" style="padding: 5%;">
                             <div class="mt-12 md:mt-0 lg-font-size headerFont" style="color: var(--black);">
                                 {{showDetails.property.address}}
                             </div>

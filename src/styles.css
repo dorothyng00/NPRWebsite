@@ -542,7 +542,6 @@ dt.expanded {
     background-color: var(--white);
     z-index: 102;
     overflow-y: scroll;
-    padding: 5%;
 }
 .isActive {
     display: flex !important;
