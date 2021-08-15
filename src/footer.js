@@ -2,7 +2,7 @@ const footer = document.getElementById('footer');
 footer.innerHTML = `
 <div class="w-full" style="background-color:var(--darkblue);">
     <div class="container mx-auto">
-        <div class="my-8 md:my-0" style="padding:5%">
+        <div style="padding:5%">
             <img class="hidden md:block mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white.png" style="object-fit: contain; max-width:250px; cursor: pointer;" />
             <img class="md:hidden mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white-simple.png" style="object-fit: contain; width:80px; cursor: pointer;" />
             <div class="md:flex justify-between mt-8">
