@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="md:ml-3 flex items-center justify-center md:justify-left" style="color: var(--white);">
                                             <i class="fas fa-ruler-combined md-font-size"></i>
-                                            <div class="ml-2">{{showDetails.property.features.sqft + ' Sqft'}}</div>
+                                            <div class="ml-2">{{formatNumber(showDetails.property.features.sqft) + ' Sqft'}}</div>
                                         </div>
                                     </div>
                                     <div class="lg:ml-8 mt-5 lg:mt-0 flex-1 flex justify-center md:justify-start lg:justify-end">
@@ -134,7 +134,7 @@
                                             </div>
                                             <div class="md:ml-3 flex items-center">
                                                 <i class="fas fa-ruler-combined md-font-size" style="color: var(--black);"></i>
-                                                <div class="ml-2">{{prop.features.sqft + ' Sqft'}}</div>
+                                                <div class="ml-2">{{formatNumber(prop.features.sqft) + ' Sqft'}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                             features:{
                                 beds:2,
                                 baths:2,
-                                sqft:600,
+                                sqft:1200,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
@@ -227,7 +227,6 @@
 				        this.showDetails.property = {}
                     },
                     updateShowDetails(obj){
-                        console.log('OBJ', obj)
                         this.showDetails.property = obj
                         this.showDetails.visible = true
                     },
