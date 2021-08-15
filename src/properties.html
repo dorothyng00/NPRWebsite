@@ -66,7 +66,7 @@
 
 
                             <div class="mt-10 sm-font-size bodyFont md:flex" style="color: var(--black);">
-                                <div class="w-full md:w-1/5 mb-8 bodyFont sm-font-size">
+                                <div class="w-full md:w-1/5 mb-8 md:mb-0 bodyFont sm-font-size">
                                     <div style="font-weight: bold;">
                                         Status
                                     </div>
@@ -97,6 +97,24 @@
                                 </div>
 
                                 <div class="w-full md:w-4/5" v-html="showDetails.property.description">
+                                </div>
+                            </div>
+
+
+                            <div class="w-full mt-10">
+                                <div class="lg-font-size headerFont">
+                                    Unit Details
+                                </div>
+                                <div class="grid mt-10">
+                                    <div class="flex items-center">
+                                        <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:30px" class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="ml-3 flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">Financial Reporting</div>
+                                            <i class="far fa-check-circle" style="color: var(--green);"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +188,6 @@
                             price:1895,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
-                            furnished:false,
                             utilities:{
                                 heat:false,
                                 water:false,
@@ -181,6 +198,9 @@
                                 beds:1,
                                 baths:1,
                                 sqft:600,
+                            },
+                            other:{
+                                furnished:false,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
@@ -189,14 +209,12 @@
                         },
                         {
                             image:'/assets/properties/placeholder.jpg',
-                            imagex2:'/assets/properties/placeholder.jpg',
                             type:'Lowrise',
                             status:'Leased',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
                             price:1895,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
-                            furnished:false,
                             utilities:{
                                 heat:false,
                                 water:false,
@@ -207,6 +225,9 @@
                                 beds:2,
                                 baths:2,
                                 sqft:1200,
+                            },
+                            other:{
+                                furnished:false,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
