@@ -18,192 +18,194 @@
         <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo. -->
         <div id="vue-home" class="relative w-full h-full">
             <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
-            <div class="hero-img-card">
-                <img src="https://cdn.bildhive.com/noinstace/8f430edb50f94fe19b4b17b6ff45c1a3.png" class="hero-img-cover" />
-            </div>
-            <div class="py-10">
-                <div class="sm-padding-y container mx-auto">
-                    <div style="padding-right:5%; padding-left:5%">
-                        <div class="text-center mb-10 xl-font-size bodyFont">Why Choose North Point?</div>
-                        <div class="text-center mb-3 sm-font-size bodyFont">Our Team of Property Managers, Leasing Specialists, and Property Consultants provide the knowledge and expertise to get your property rented out at its highest market value.</div>
-                        <div class="text-center sm-font-size bodyFont">From finding your property a qualified corporate tenant to managing your real estate assets, our team of professionals will guide you through every step of the process.</div>
-                        <div class="mt-20 w-2/3 mx-auto">
-                            <div class="quote mx-auto relative">
-                                <div class="absolute" style="left:0; top:0;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 32 28"><path id="Quote_Left" data-name="Quote Left" class="leftQuote" d="M20.916,28a3.752,3.752,0,0,1-3.687-3.813V10.181A10.041,10.041,0,0,1,27.073,0H28.3a1.262,1.262,0,0,1,1.229,1.271V3.813A1.264,1.264,0,0,1,28.3,5.1H27.073a5,5,0,0,0-4.917,5.084v.642a1.933,1.933,0,0,0,.538,1.344,1.809,1.809,0,0,0,1.3.557H28.3A3.764,3.764,0,0,1,32,16.548v7.638A3.763,3.763,0,0,1,28.3,28ZM3.687,28A3.752,3.752,0,0,1,0,24.187V10.181A10.041,10.041,0,0,1,9.843,0h1.229A1.262,1.262,0,0,1,12.3,1.271V3.813A1.263,1.263,0,0,1,11.073,5.1H9.843a5,5,0,0,0-4.916,5.084v.642a1.87,1.87,0,0,0,1.838,1.9h4.307a3.763,3.763,0,0,1,3.7,3.825v7.638A3.763,3.763,0,0,1,11.073,28Z"/> </svg>
-                                </div>
-                                <div class="absolute" style="right:0; bottom:0;">
-                                    <svg style="transform: rotate(180deg);" xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 32 28"><path id="Quote_Left" data-name="Quote Left" class="leftQuote" d="M20.916,28a3.752,3.752,0,0,1-3.687-3.813V10.181A10.041,10.041,0,0,1,27.073,0H28.3a1.262,1.262,0,0,1,1.229,1.271V3.813A1.264,1.264,0,0,1,28.3,5.1H27.073a5,5,0,0,0-4.917,5.084v.642a1.933,1.933,0,0,0,.538,1.344,1.809,1.809,0,0,0,1.3.557H28.3A3.764,3.764,0,0,1,32,16.548v7.638A3.763,3.763,0,0,1,28.3,28ZM3.687,28A3.752,3.752,0,0,1,0,24.187V10.181A10.041,10.041,0,0,1,9.843,0h1.229A1.262,1.262,0,0,1,12.3,1.271V3.813A1.263,1.263,0,0,1,11.073,5.1H9.843a5,5,0,0,0-4.916,5.084v.642a1.87,1.87,0,0,0,1.838,1.9h4.307a3.763,3.763,0,0,1,3.7,3.825v7.638A3.763,3.763,0,0,1,11.073,28Z"/> </svg>
-                                </div>
-                                <div class="px-10 md:px-20 sm-font-size bodyFont text-center" style="color: var(--black);">
-                                    Let us be the point of interaction in all your real estate needs.<br>Sit back and watch your investments grow with North Point Realty Inc.
-                                </div>
-                            </div>
-                            <div class="mt-5 text-center">
-                                <div class="sm-font-size headerFont" style="color: var(--black);">
-                                    Steven To
-                                </div>
-                                <div class="xs-font-size bodyFont" style="color: var(--black);">
-                                    Realtor Agent
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-10 flex justify-center items-center">
-                            <div>
-                                <ul class="mx-auto">
-                                    <li style="width: 80px; height: 80px;">
-                                        <img class="w-full h-full" style="object-fit: cover; border-radius: 50%;" src="/assets/properties/placeholder.jpg" />
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
+                <div class="hero-img-card">
+                    <img src="https://cdn.bildhive.com/noinstace/8f430edb50f94fe19b4b17b6ff45c1a3.png" class="hero-img-cover" />
                 </div>
-            </div>
-            <div class="lg-padding-y" style="background-color:var(--darkblue); color:white">
-                <div class="container mx-auto py-10 md:py-0">
-                    <div style="padding:0 5%">
-                        <div class="lg-font-size bodyFont text-center">We Manage</div>
-                        <div class="flex justify-center">
-                            <div class="md:w-2/3 text-center mt-2 mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque.</div>
-                        </div>
-                        <div class="container mx-auto flex justify-center">
-                            <div class="md:grid grid-cols-3 gap-10 w-full sm:w-4/5 md:w-2/3 ">
+                <div class="py-10">
+                    <div class="sm-padding-y container mx-auto">
+                        <div style="padding-right:5%; padding-left:5%">
+                            <div class="text-center mb-10 xl-font-size bodyFont">Why Choose North Point?</div>
+                            <div class="text-center mb-3 sm-font-size bodyFont">Our Team of Property Managers, Leasing Specialists, and Property Consultants provide the knowledge and expertise to get your property rented out at its highest market value.</div>
+                            <div class="text-center sm-font-size bodyFont">From finding your property a qualified corporate tenant to managing your real estate assets, our team of professionals will guide you through every step of the process.</div>
+                            <div class="mt-20 w-2/3 mx-auto">
+                                <div class="quote mx-auto relative">
+                                    <div class="absolute" style="left:0; top:0;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 32 28"><path id="Quote_Left" data-name="Quote Left" class="leftQuote" d="M20.916,28a3.752,3.752,0,0,1-3.687-3.813V10.181A10.041,10.041,0,0,1,27.073,0H28.3a1.262,1.262,0,0,1,1.229,1.271V3.813A1.264,1.264,0,0,1,28.3,5.1H27.073a5,5,0,0,0-4.917,5.084v.642a1.933,1.933,0,0,0,.538,1.344,1.809,1.809,0,0,0,1.3.557H28.3A3.764,3.764,0,0,1,32,16.548v7.638A3.763,3.763,0,0,1,28.3,28ZM3.687,28A3.752,3.752,0,0,1,0,24.187V10.181A10.041,10.041,0,0,1,9.843,0h1.229A1.262,1.262,0,0,1,12.3,1.271V3.813A1.263,1.263,0,0,1,11.073,5.1H9.843a5,5,0,0,0-4.916,5.084v.642a1.87,1.87,0,0,0,1.838,1.9h4.307a3.763,3.763,0,0,1,3.7,3.825v7.638A3.763,3.763,0,0,1,11.073,28Z"/> </svg>
+                                    </div>
+                                    <div class="absolute" style="right:0; bottom:0;">
+                                        <svg style="transform: rotate(180deg);" xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 32 28"><path id="Quote_Left" data-name="Quote Left" class="leftQuote" d="M20.916,28a3.752,3.752,0,0,1-3.687-3.813V10.181A10.041,10.041,0,0,1,27.073,0H28.3a1.262,1.262,0,0,1,1.229,1.271V3.813A1.264,1.264,0,0,1,28.3,5.1H27.073a5,5,0,0,0-4.917,5.084v.642a1.933,1.933,0,0,0,.538,1.344,1.809,1.809,0,0,0,1.3.557H28.3A3.764,3.764,0,0,1,32,16.548v7.638A3.763,3.763,0,0,1,28.3,28ZM3.687,28A3.752,3.752,0,0,1,0,24.187V10.181A10.041,10.041,0,0,1,9.843,0h1.229A1.262,1.262,0,0,1,12.3,1.271V3.813A1.263,1.263,0,0,1,11.073,5.1H9.843a5,5,0,0,0-4.916,5.084v.642a1.87,1.87,0,0,0,1.838,1.9h4.307a3.763,3.763,0,0,1,3.7,3.825v7.638A3.763,3.763,0,0,1,11.073,28Z"/> </svg>
+                                    </div>
+                                    <div class="px-10 md:px-20 sm-font-size bodyFont text-center" style="color: var(--black);">
+                                        Let us be the point of interaction in all your real estate needs.<br>Sit back and watch your investments grow with North Point Realty Inc.
+                                    </div>
+                                </div>
+                                <div class="mt-5 text-center">
+                                    <div class="sm-font-size headerFont" style="color: var(--black);">
+                                        Steven To
+                                    </div>
+                                    <div class="xs-font-size bodyFont" style="color: var(--black);">
+                                        Realtor Agent
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-10 flex justify-center items-center">
                                 <div>
-                                    <div class="flex justify-center">
-                                        <div class="flex justify-center items-center" style="background-color:var(--offwhite); width:100px; height:100px; border-radius:50%; border:2px solid var(--offwhite); color:black"><i style="font-size:50px" class="fas fa-building"></i></div>
-                                    </div>
-                                    <div class="mt-3 md-font-size bodyFont text-center">Condos</div>
-                                    <div class="flex justify-center">
-                                        <div class="w-2/3 md:w-full sm-font-size bodyFont text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
-                                    </div>
+                                    <ul class="mx-auto">
+                                        <li style="width: 80px; height: 80px;">
+                                            <img class="w-full h-full" style="object-fit: cover; border-radius: 50%;" src="/assets/properties/placeholder.jpg" />
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="mt-10 md:mt-0">
-                                    <div class="flex justify-center">
-                                        <div class="flex justify-center items-center" style="background-color:var(--offwhite); color:black; width:100px; height:100px; border-radius:50%; border:2px solid var(--offwhite)"><i style="font-size:50px" class="fas fa-home"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg-padding-y" style="background-color:var(--darkblue); color:white">
+                    <div class="container mx-auto py-10 md:py-0">
+                        <div style="padding:0 5%">
+                            <div class="lg-font-size bodyFont text-center">We Manage</div>
+                            <div class="flex justify-center">
+                                <div class="md:w-2/3 text-center mt-2 mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque.</div>
+                            </div>
+                            <div class="container mx-auto flex justify-center">
+                                <div class="md:grid grid-cols-3 gap-10 w-full sm:w-4/5 md:w-2/3 ">
+                                    <div>
+                                        <div class="flex justify-center">
+                                            <div class="flex justify-center items-center" style="background-color:var(--offwhite); width:100px; height:100px; border-radius:50%; border:2px solid var(--offwhite); color:black"><i style="font-size:50px" class="fas fa-building"></i></div>
+                                        </div>
+                                        <div class="mt-3 md-font-size bodyFont text-center">Condos</div>
+                                        <div class="flex justify-center">
+                                            <div class="w-2/3 md:w-full sm-font-size bodyFont text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 md-font-size bodyFont text-center">Family Houses</div>
-                                    <div class="flex justify-center">
-                                        <div class="w-2/3 md:w-full sm-font-size bodyFont text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                                    <div class="mt-10 md:mt-0">
+                                        <div class="flex justify-center">
+                                            <div class="flex justify-center items-center" style="background-color:var(--offwhite); color:black; width:100px; height:100px; border-radius:50%; border:2px solid var(--offwhite)"><i style="font-size:50px" class="fas fa-home"></i></div>
+                                        </div>
+                                        <div class="mt-3 md-font-size bodyFont text-center">Family Houses</div>
+                                        <div class="flex justify-center">
+                                            <div class="w-2/3 md:w-full sm-font-size bodyFont text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mt-10 md:mt-0">
-                                    <div class="flex justify-center">
-                                        <div class="flex justify-center items-center" style="background-color:var(--offwhite); color:black; width:100px; height:100px; border-radius:50%; border:2px solid var(--offwhite)"><i style="font-size:50px" class="fas fa-city"></i></div>
-                                    </div>
-                                    <div class="mt-3 md-font-size bodyFont text-center">Multi-Units</div>
-                                    <div class="flex justify-center">
-                                        <div class="w-2/3 md:w-full sm-font-size bodyFont text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                                    <div class="mt-10 md:mt-0">
+                                        <div class="flex justify-center">
+                                            <div class="flex justify-center items-center" style="background-color:var(--offwhite); color:black; width:100px; height:100px; border-radius:50%; border:2px solid var(--offwhite)"><i style="font-size:50px" class="fas fa-city"></i></div>
+                                        </div>
+                                        <div class="mt-3 md-font-size bodyFont text-center">Multi-Units</div>
+                                        <div class="flex justify-center">
+                                            <div class="w-2/3 md:w-full sm-font-size bodyFont text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- <div class="lg-padding-y" style="background-color:var(--black)">
-                <div class="my-5 container mx-auto">
-                    <div style="padding-right:5%; padding-left:5%">
-                        <div class="text-center mb-10 md:mb-20 xl-font-size headerFont" style="color:white">
-                            Property Management
-                        </div>
-                        <div class="flex" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-address-card"></i>
+                <!-- <div class="lg-padding-y" style="background-color:var(--black)">
+                    <div class="my-5 container mx-auto">
+                        <div style="padding-right:5%; padding-left:5%">
+                            <div class="text-center mb-10 md:mb-20 xl-font-size headerFont" style="color:white">
+                                Property Management
                             </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Tenant Placement</div>
-                                <div>All potential tenants are screened ahead of time to provide you with high quality AAA tenants. Prescreening includes documents such as government IDs, credit report, income verification, references, etc.</div>
+                            <div class="flex" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-address-card"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Tenant Placement</div>
+                                    <div>All potential tenants are screened ahead of time to provide you with high quality AAA tenants. Prescreening includes documents such as government IDs, credit report, income verification, references, etc.</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex mt-10" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-chart-line"></i>
+                            <div class="flex mt-10" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Financial Reporting</div>
+                                    <div>You will be able to track the condition of your investment with our annual inspections. These visits allow you to stay up to date on the condition of your investment and helps us to be proactive in the maintenance of your property.</div>
+                                </div>
                             </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Financial Reporting</div>
-                                <div>You will be able to track the condition of your investment with our annual inspections. These visits allow you to stay up to date on the condition of your investment and helps us to be proactive in the maintenance of your property.</div>
+                            <div class="flex mt-10" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Rent Collection</div>
+                                    <div>Here at North Point Realty we collect rent for you. Tenants can pay rent to us via our digital platforms. Direct deposit and bill payments to you make it easy for you to keep track of your earnings.</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex mt-10" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-hand-holding-usd"></i>
+                            <div class="flex mt-10" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-running"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Tenant Eviction</div>
+                                    <div>We have a in-house legal department who evaluates your case, to focus on evicting the tenant as quickly as possible. We navigate Landlord and Tenant Board paperwork for you.</div>
+                                </div>
                             </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Rent Collection</div>
-                                <div>Here at North Point Realty we collect rent for you. Tenants can pay rent to us via our digital platforms. Direct deposit and bill payments to you make it easy for you to keep track of your earnings.</div>
+                            <div class="flex mt-10" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-tools"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Maintenance & Repairs</div>
+                                    <div>You will no longer need to worry about taking care of maintenance issues on your own. We will coordinate all the repairs using licensed contractors to make sure the job gets done right the first time.</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex mt-10" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-running"></i>
+                            <div class="flex mt-10" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-file-contract"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Lease Renewals</div>
+                                    <div>As we approach the end of your current lease with our tenant. Our team of professionals will proactively start searching for another suitable tenant so we don't experience any vacancies.</div>
+                                </div>
                             </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Tenant Eviction</div>
-                                <div>We have a in-house legal department who evaluates your case, to focus on evicting the tenant as quickly as possible. We navigate Landlord and Tenant Board paperwork for you.</div>
-                            </div>
-                        </div>
-                        <div class="flex mt-10" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-tools"></i>
-                            </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Maintenance & Repairs</div>
-                                <div>You will no longer need to worry about taking care of maintenance issues on your own. We will coordinate all the repairs using licensed contractors to make sure the job gets done right the first time.</div>
-                            </div>
-                        </div>
-                        <div class="flex mt-10" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-file-contract"></i>
-                            </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Lease Renewals</div>
-                                <div>As we approach the end of your current lease with our tenant. Our team of professionals will proactively start searching for another suitable tenant so we don't experience any vacancies.</div>
-                            </div>
-                        </div>
-                        <div class="flex mt-10" style="color:white">
-                            <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
-                                <i style="font-size:30px" class="fas fa-user-check"></i>
-                            </div>
-                            <div class="ml-3 flex-1">
-                                <div class="md-font-size bodyFont">Tenant Guarantee</div>
-                                <div>If the tenant we provide were to ever break the lease within the lease term, we guarantee another qualified tenant free of charge.</div>
+                            <div class="flex mt-10" style="color:white">
+                                <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid white">
+                                    <i style="font-size:30px" class="fas fa-user-check"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="md-font-size bodyFont">Tenant Guarantee</div>
+                                    <div>If the tenant we provide were to ever break the lease within the lease term, we guarantee another qualified tenant free of charge.</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div> -->
-            <div class="my-10 lg-padding-y container mx-auto">
-                <div style="padding:0 5%">
-                    <div class="md:flex items-center">
-                        <div class="w-full md:w-1/2">
-                            <div class="img-holder-box-2">
-                                <img class="img-cover-2" src="/assets/placeholder-feature1.png" /> 
+                </div> -->
+                <div class="my-10 lg-padding-y container mx-auto">
+                    <div style="padding:0 5%">
+                        <div class="md:flex items-center">
+                            <div class="w-full md:w-1/2">
+                                <div class="img-holder-box-2">
+                                    <img class="img-cover-2" src="/assets/placeholder-feature1.png" /> 
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-full md:w-1/2 lg:w-1/3 pl-0 md:pl-10">
-                            <div class="md-font-size bodyFont mb-3 mt-3 md:mt-0">Tenant Placement Service</div>
-                            <div class="sm-font-size bodyFont">Looking to get your property leased out? We provide qualified AAA prescreened tenants. Contact us for a free appraisal!</div>
-                            <button class="py-2 px-5 solidButton mt-5" onclick="document.location = '/src/contact.html'">Contact Now</button>
-                        </div>
-                    </div>
-                    <div class="md:flex items-center mt-10 md:mt-20">
-                        <div class="w-full md:w-1/2 order-2">
-                            <div class="img-holder-box-2">
-                                <img class="img-cover-2" src="/assets//placeholder-feature2.png" /> 
-                            </div>
-                        </div>
-                        <div class="w-full md:w-1/2 flex justify-end md:text-right pr-10">
-                            <div class="md:w-full lg:w-2/3">
+                            <div class="w-full md:w-1/2 lg:w-1/3 pl-0 md:pl-10">
                                 <div class="md-font-size bodyFont mb-3 mt-3 md:mt-0">Tenant Placement Service</div>
                                 <div class="sm-font-size bodyFont">Looking to get your property leased out? We provide qualified AAA prescreened tenants. Contact us for a free appraisal!</div>
-                                <button onclick="document.location = '/src/property-management.html'" class="py-2 px-5 solidButton mt-5">Learn More</button>
+                                <button class="py-2 px-5 solidButton mt-5" onclick="document.location = '/src/contact.html'">Contact Now</button>
+                            </div>
+                        </div>
+                        <div class="md:flex items-center mt-10 md:mt-20">
+                            <div class="w-full md:w-1/2 order-2">
+                                <div class="img-holder-box-2">
+                                    <img class="img-cover-2" src="/assets//placeholder-feature2.png" /> 
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2 flex justify-end md:text-right pr-10">
+                                <div class="md:w-full lg:w-2/3">
+                                    <div class="md-font-size bodyFont mb-3 mt-3 md:mt-0">Tenant Placement Service</div>
+                                    <div class="sm-font-size bodyFont">Looking to get your property leased out? We provide qualified AAA prescreened tenants. Contact us for a free appraisal!</div>
+                                    <button onclick="document.location = '/src/property-management.html'" class="py-2 px-5 solidButton mt-5">Learn More</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="footer"></div>  
             </div>
-            <div id="footer"></div>  
         </div>
 
         <script src="navbar.js"></script>
