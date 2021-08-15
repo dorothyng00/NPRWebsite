@@ -18,17 +18,20 @@
             <div v-if="showDetails.visible" class="fixed w-screen h-screen hidden items-center justify-center top-0 left-0" :class="showDetails.visible ? 'isActive' : 'notActive'" style="z-index: 200;">
                 <div class="relative w-full h-full flex justify-center items-center">
                     <div @click="closeViewDetails()" class="absolute w-full h-full details-mask-overlay"></div>
-                    <div class="relative w-full h-full md:w-3/4 md:h-5/6 details-page">
-                        <div class="flex items-center justify-between xl-font-size headerFont">
-                            TEST
-                            <button @click="closeViewDetails()" class="text-gray-500">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-8 w-8">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </button>
+                    <div class="relative w-full h-full md:w-3/5 md:h-5/6 details-page">
+                        <button @click="closeViewDetails()" class="absolute right-5 top-5 text-gray-500">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-8 w-8">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                        <div v-if="showDetails.property">
+                            <div class="mt-12 md:mt-0 lg-font-size headerFont" style="color: var(--black);">
+                                {{showDetails.property.address}}
+                            </div>
+                            <div class="mt-8 propimg-holder-box">
+                                <img class="propimg-cover" :src="showDetails.property.image" />
+                            </div>
                         </div>
-                        <hr class="mt-5" style="border-top: 3px solid black;" />
-                        asfasf
                     </div>
                 </div>
             </div>
@@ -39,10 +42,16 @@
                         <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-14 sm:gap-16 lg:gap-20">
                             <template v-for="(prop,propI) in properties">
                                 <div @click="updateShowDetails(prop)" class="w-full">
-                                    <div class="img-holder-box">
-                                        <img class="img-cover" src="/assets/properties/placeholder.jpg" />
+                                    <div class="img-holder-box relative">
+                                        <div class="absolute top-4 left-4 px-3 py-1" style="z-index: 2; border-radius: 5px; user-select: none; cursor: pointer; color: var(--white);" :style="[prop.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
+                                            {{prop.status}}
+                                        </div>
+                                        <img class="img-cover" :src="prop.image" />
                                     </div>
                                     <div>
+                                        <div>
+                                            {{prop.address}}
+                                        </div>
                                         <i class="fas fa-bed"></i>
                                         <i class="fas fa-bath"></i>
                                         <i class="fas fa-ruler-combined"></i>
@@ -71,13 +80,14 @@
                     },
                     properties:[
                         {
-                            image:'',
-                            imagex2:'',
-                            status:'',
-                            address:'',
-                            price:'',
-                            description:'',
-                            date:'',
+                            image:'/assets/properties/placeholder.jpg',
+                            featuredImages:[],
+                            type:'highrise',
+                            status:'Available',
+                            address:'215 Queen St E, Brampton, ON L6W 0A9',
+                            price:1895,
+                            description:'One Bedroom Plus Den (1+den) Available May 1, 2021. Located in Brampton at 215 Queen St E (Queen St E & Kennedy Rd S), this unit is perfect for any professional individual/couple or a small family! Close to Bramalea City Centre, Hwy 410, with many restaurants and shops just steps away. Come take a look at the unit yourself!',
+                            date:'May 1, 2021',
                             furnished:false,
                             utilities:{
                                 heat:false,
@@ -86,9 +96,37 @@
                                 internet:false
                             },
                             features:{
-                                bed:0,
-                                bath:0,
-                                sqft:0,
+                                bed:1,
+                                bath:1,
+                                sqft:600,
+                                parking:1,
+                                garage:0,
+                                exposure:'',
+                            },
+                            agreementType:'',
+                        },
+                        {
+                            image:'/assets/properties/placeholder.jpg',
+                            imagex2:'/assets/properties/placeholder.jpg',
+                            type:'highrise',
+                            status:'Leased',
+                            address:'215 Queen St E, Brampton, ON L6W 0A9',
+                            price:1895,
+                            description:'One Bedroom Plus Den (1+den) Available May 1, 2021. Located in Brampton at 215 Queen St E (Queen St E & Kennedy Rd S), this unit is perfect for any professional individual/couple or a small family! Close to Bramalea City Centre, Hwy 410, with many restaurants and shops just steps away. Come take a look at the unit yourself!',
+                            date:'May 1, 2021',
+                            furnished:false,
+                            utilities:{
+                                heat:false,
+                                water:false,
+                                hydro:false,
+                                internet:false
+                            },
+                            features:{
+                                bed:1,
+                                bath:1,
+                                sqft:600,
+                                parking:1,
+                                garage:0,
                                 exposure:'',
                             },
                             agreementType:'',
