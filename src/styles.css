@@ -528,7 +528,6 @@ dt.expanded {
     width:100%;
     height:100%;
     object-fit:cover;
-    cursor: pointer;
 }
 .propimg-holder-box {
     height: 0;
