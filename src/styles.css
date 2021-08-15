@@ -1,3 +1,4 @@
+/* Global Classes */
 :root {
     --darkblue: #032E5B;
     --lightblue : #586BA4;
@@ -7,14 +8,21 @@
     --offwhite: #F6F6F6;
     --gray: #939393;
     --black: #111111;
+    --white: #FFFFFF;
 }
-
+.headerFont {
+    font-family: "Calibri", sans-serif;
+}
+.bodyFont {
+    font-family: "Calibri", sans-serif;
+}
 .global-background-img {
 	min-height:100%;
 	background-size:cover !important;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 }
+
 
 
 /* Scrollbar Classes */
@@ -47,7 +55,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #fff;
+    background-color: var(--white);
 }
 
 .navbar {
@@ -97,7 +105,7 @@
 .menu-toggle .bar{
     width: 25px;
     height: 3px;
-    background-color: #FFF;
+    background-color: var(--white);
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
@@ -152,7 +160,7 @@
         justify-content: start;
         top: 0;
         left: 0;
-        background-color: #fff;
+        background-color: var(--white);
         width: 100%;
         gap: 20px;
         height: 100vh;
@@ -162,7 +170,7 @@
     }
 
     .nav-item a {
-        color: #000;
+        color: var(--black);
     }
     
     .navbar li {
@@ -185,17 +193,6 @@
     .mobile-nav {
         transform: translate(0%)!important;
     }
-}
-
-
-
-/* Font Family */
-.headerFont {
-    font-family: "Calibri", sans-serif;
-    line-height: 1.25;
-}
-.bodyFont {
-    font-family: "Calibri", sans-serif;
 }
 
 
@@ -387,9 +384,9 @@
 /* Button Classes */
 .transparentButton-white {
     background-color: transparent;
-    color: white;
+    color: var(--white);
     border: 2px solid;
-    border-color: white;
+    border-color: var(--white);
     transition: color 0.2s ease-out;
 }
 .transparentButton-white:hover {
@@ -411,7 +408,7 @@
 }
 .solidButton {
     background-color: var(--black);
-    color: white;
+    color: var(--white);
     transition: background-color 0.2s ease-out;
 }
 .solidButton:hover {
@@ -430,8 +427,8 @@ dt:not(:first-child) {
     margin-top: 1.25em;
 }
 .accordion-dropdown dt {
-    background: #EAEAEA;
-    color: #000000;
+    background: var(--offwhite);
+    color: var(--black);
     user-select: none;
     -webkit-user-select: none;
     cursor: pointer;
@@ -449,12 +446,12 @@ dt:not(:first-child) {
 
 dt.expanded svg{
     transform: rotate(90deg);
-    stroke: #FFFFFF !important;
+    stroke: var(--white) !important;
     opacity: 1;
 }
 dt.expanded {
     background-color: var(--darkblue) !important;
-    color: #FFFFFF !important;
+    color: var(--white) !important;
 }
 .faq-tabs {
     cursor: pointer;
@@ -495,3 +492,6 @@ dt.expanded {
     object-fit:cover;
     transition:transform 1s ease-out;
 }
+
+
+/* Properties Page */
