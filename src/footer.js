@@ -15,10 +15,6 @@ footer.innerHTML = `
                     </div>
                 </div>
                 <div class="mt-8 md:mt-0" style="color:white">
-                    <div class="text-center md:text-left sm-font-size bodyFont mb-2">Head Office</div>
-                    <div class="text-center md:text-left xs-font-size bodyFont">47 Redlea Ave<br>Scarborough, ON</div>
-                </div>
-                <div class="mt-8 md:mt-0" style="color:white">
                     <div class="text-center md:text-left sm-font-size bodyFont mb-2">Navigate</div>
                     <div class="text-center md:text-left xs-font-size bodyFont md:flex">
                         <div>
@@ -32,6 +28,10 @@ footer.innerHTML = `
                             <div><a href="/src/properties">Properties</a></div>
                         </div>
                     </div>
+                </div>
+                <div class="mt-8 md:mt-0" style="color:white">
+                    <div class="text-center md:text-left sm-font-size bodyFont mb-2">Head Office</div>
+                    <div class="text-center md:text-left xs-font-size bodyFont">47 Redlea Ave<br>Scarborough, ON</div>
                 </div>
             </div>
         </div>
