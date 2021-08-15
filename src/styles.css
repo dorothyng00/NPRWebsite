@@ -42,7 +42,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--darkorange); 
+    background: var(--lightblue); 
 }
 
 
@@ -215,7 +215,7 @@
     }
     .md-font-size {
         font-size: 24px;
-		line-height: 1.5;
+		line-height: 1.35;
     }
     .sm-font-size {
         font-size: 18px;
@@ -241,7 +241,7 @@
     }
     .md-font-size {
         font-size: 20px;
-		line-height: 1.5;
+		line-height: 1.35;
     }
     .sm-font-size {
         font-size: 16px;
@@ -267,7 +267,7 @@
     }
     .md-font-size {
         font-size: 20px;
-		line-height: 1.5;
+		line-height: 1.35;
     }
     .sm-font-size {
         font-size: 16px;
@@ -293,7 +293,7 @@
     }
     .md-font-size {
         font-size: 18px;
-		line-height: 1.5;
+		line-height: 1.35;
     }
     .sm-font-size {
         font-size: 16px;
@@ -319,7 +319,7 @@
     }
     .md-font-size {
         font-size: 18px;
-		line-height: 1.5;
+		line-height: 1.35;
     }
     .sm-font-size {
         font-size: 14px;
@@ -392,8 +392,8 @@
     transition: color 0.2s ease-out;
 }
 .transparentButton-white:hover {
-    color: var(--orange);
-    border-color: var(--orange);
+    color: var(--darkorange);
+    border-color: var(--darkorange);
     transition: color 0.2s ease-out;
 }
 .transparentButton {
@@ -404,8 +404,8 @@
     transition: color 0.2s ease-out;
 }
 .transparentButton:hover {
-    color: var(--orange);
-    border-color: var(--orange);
+    color: var(--darkorange);
+    border-color: var(--darkorange);
     transition: color 0.2s ease-out;
 }
 .solidButton {
@@ -414,8 +414,8 @@
     transition: background-color 0.2s ease-out;
 }
 .solidButton:hover {
-    background-color: var(--orange);
-    border-color: var(--orange);
+    background-color: var(--darkorange);
+    border-color: var(--darkorange);
     transition: background-color 0.2s ease-out;
 }
 
@@ -529,12 +529,24 @@ dt.expanded {
     height:100%;
     object-fit:cover;
 }
-.propimg-holder-box {
-    height: 0;
-    overflow: hidden;
-    padding-bottom: 50%;
-    position: relative;
+
+@media screen and (min-width: 768px){
+    .propimg-holder-box {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 50%;
+        position: relative;
+    }
 }
+@media screen and (max-width: 768px){
+    .propimg-holder-box {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 75%;
+        position: relative;
+    }
+}
+
 .propimg-cover {
     position:absolute;
     left:0;

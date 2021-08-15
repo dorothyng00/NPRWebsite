@@ -28,11 +28,69 @@
                         </div>
                         
                         <div v-if="showDetails.property" style="padding: 5%;">
-                            <div class="mt-12 md:mt-0 lg-font-size headerFont" style="color: var(--black);">
+                            <div class="mt-12 md:mt-0 lg-font-size headerFont" style="color: var(--black); font-weight: bold;">
                                 {{showDetails.property.address}}
                             </div>
-                            <div class="mt-8 propimg-holder-box">
+                            <div class="mt-8 propimg-holder-box relative">
+                                <div class="absolute top-4 left-4 px-3 py-1" style="z-index: 2; border-radius: 5px; user-select: none; color: var(--white);" :style="[showDetails.property.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
+                                    {{showDetails.property.status}}
+                                </div>
                                 <img class="propimg-cover" :src="showDetails.property.image" />
+                            </div>
+                            <div class="w-full md:flex items-center py-3 px-4 text-center md:text-left" style="background-color: var(--darkblue);">
+                                <div class="md-font-size headerFont" style="color: var(--white); font-weight: bold;">
+                                    ${{formatNumber(showDetails.property.price) + '/month'}}
+                                </div>
+                                <div class="md:ml-8 md:flex mt-2 md:mt-0">
+                                    <div class="flex items-center justify-center md:justify-left" style="color: var(--white);">
+                                        <i class="fas fa-bed md-font-size"></i>
+                                        <div class="ml-2">{{showDetails.property.features.beds}}<span v-if="showDetails.property.features.beds > 1"> Beds</span><span v-else> Bed</span></div>
+                                    </div>
+                                    <div class="md:ml-3 flex items-center justify-center md:justify-left" style="color: var(--white);">
+                                        <i class="fas fa-bath md-font-size"></i>
+                                        <div class="ml-2">{{showDetails.property.features.baths}}<span v-if="showDetails.property.features.baths > 1"> Baths</span><span v-else> Bath</span></div>
+                                    </div>
+                                    <div class="md:ml-3 flex items-center justify-center md:justify-left" style="color: var(--white);">
+                                        <i class="fas fa-ruler-combined md-font-size"></i>
+                                        <div class="ml-2">{{showDetails.property.features.sqft + ' Sqft'}}</div>
+                                    </div>
+                                </div>
+                                <div class="md:ml-8 md:flex mt-2 md:mt-0">
+                                    <button class="py-2 px-5 transparentButton-white">Contact Now</button>
+                                </div>
+                            </div>
+                            <div class="mt-10 sm-font-size bodyFont md:flex" style="color: var(--black);">
+                                <div class="w-full md:w-1/5 mb-8 bodyFont sm-font-size">
+                                    <div style="font-weight: bold;">
+                                        Status
+                                    </div>
+                                    <div class="px-3 py-1" style="display: inline-block; border-radius: 5px; user-select: none; color: var(--white);" :style="[showDetails.property.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
+                                        {{showDetails.property.status}}
+                                    </div>
+
+                                    <div class="mt-8" style="font-weight: bold;">
+                                        Move-in Date
+                                    </div>
+                                    <div>
+                                        {{showDetails.property.date}}
+                                    </div>
+
+                                    <div class="mt-8" style="font-weight: bold;">
+                                        Property Type
+                                    </div>
+                                    <div>
+                                        {{showDetails.property.type}}
+                                    </div>
+
+                                    <div class="mt-8" style="font-weight: bold;">
+                                        Agreement Type
+                                    </div>
+                                    <div>
+                                        {{showDetails.property.agreementType}}
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-4/5" v-html="showDetails.property.description">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,7 +100,7 @@
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
                         <h1 class="headerFont xl-font-size">Available Properties</h1>
-                        <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-14 sm:gap-16 lg:gap-20">
+                        <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 lg:gap-20">
                             <template v-for="(prop,propI) in properties">
                                 <div @click="updateShowDetails(prop)" class="w-full">
                                     <div class="img-holder-box relative">
@@ -52,12 +110,26 @@
                                         <img class="img-cover" :src="prop.image" />
                                     </div>
                                     <div>
-                                        <div>
+                                        <div class="mt-2 md-font-size headerFont" style="font-weight: bold;">
                                             {{prop.address}}
                                         </div>
-                                        <i class="fas fa-bed"></i>
-                                        <i class="fas fa-bath"></i>
-                                        <i class="fas fa-ruler-combined"></i>
+                                        <div class="mt-2 md-font-size headerFont" style="color: var(--darkorange);">
+                                            ${{formatNumber(prop.price) + '/month'}}
+                                        </div>
+                                        <div class="md:flex mt-2">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-bed md-font-size" style="color: var(--black);"></i>
+                                                <div class="ml-2">{{prop.features.beds}}<span v-if="prop.features.beds > 1"> Beds</span><span v-else> Bed</span></div>
+                                            </div>
+                                            <div class="md:ml-3 flex items-center">
+                                                <i class="fas fa-bath md-font-size" style="color: var(--black);"></i>
+                                                <div class="ml-2">{{prop.features.baths}}<span v-if="prop.features.baths > 1"> Baths</span><span v-else> Bath</span></div>
+                                            </div>
+                                            <div class="md:ml-3 flex items-center">
+                                                <i class="fas fa-ruler-combined md-font-size" style="color: var(--black);"></i>
+                                                <div class="ml-2">{{prop.features.sqft + ' Sqft'}}</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </template>
@@ -85,11 +157,11 @@
                         {
                             image:'/assets/properties/placeholder.jpg',
                             featuredImages:[],
-                            type:'highrise',
+                            type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
                             price:1895,
-                            description:'One Bedroom Plus Den (1+den) Available May 1, 2021. Located in Brampton at 215 Queen St E (Queen St E & Kennedy Rd S), this unit is perfect for any professional individual/couple or a small family! Close to Bramalea City Centre, Hwy 410, with many restaurants and shops just steps away. Come take a look at the unit yourself!',
+                            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             furnished:false,
                             utilities:{
@@ -99,23 +171,23 @@
                                 internet:false
                             },
                             features:{
-                                bed:1,
-                                bath:1,
+                                beds:1,
+                                baths:1,
                                 sqft:600,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
                             },
-                            agreementType:'',
+                            agreementType:'1 Year',
                         },
                         {
                             image:'/assets/properties/placeholder.jpg',
                             imagex2:'/assets/properties/placeholder.jpg',
-                            type:'highrise',
+                            type:'Lowrise',
                             status:'Leased',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
                             price:1895,
-                            description:'One Bedroom Plus Den (1+den) Available May 1, 2021. Located in Brampton at 215 Queen St E (Queen St E & Kennedy Rd S), this unit is perfect for any professional individual/couple or a small family! Close to Bramalea City Centre, Hwy 410, with many restaurants and shops just steps away. Come take a look at the unit yourself!',
+                            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             furnished:false,
                             utilities:{
@@ -125,14 +197,14 @@
                                 internet:false
                             },
                             features:{
-                                bed:1,
-                                bath:1,
+                                beds:2,
+                                baths:2,
                                 sqft:600,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
                             },
-                            agreementType:'',
+                            agreementType:'1 Year',
                         },
                     ]
                 },
@@ -148,8 +220,12 @@
 				        this.showDetails.property = {}
                     },
                     updateShowDetails(obj){
+                        console.log('OBJ', obj)
                         this.showDetails.property = obj
                         this.showDetails.visible = true
+                    },
+                    formatNumber(num){
+                        return num.toLocaleString(`us-EN`);
                     }
                 },
                 computed:{
