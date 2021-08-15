@@ -20,7 +20,7 @@
                     <div @click="closeViewDetails()" class="absolute w-full h-full details-mask-overlay"></div>
                     <div class="relative w-full h-full md:w-3/5 md:h-5/6 details-page">
                         <div class="flex justify-end">
-                            <button @click="closeViewDetails()" style="color: var(--black);" class="fixed mr-3 mt-3">
+                            <button @click="closeViewDetails()" style="color: var(--black); z-index: 2;" class="fixed mr-3 mt-3">
                                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-8 w-8">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -101,18 +101,125 @@
                             </div>
 
 
-                            <div class="w-full mt-10">
-                                <div class="lg-font-size headerFont">
-                                    Unit Details
+                            <div class="w-full mt-12">
+                                <div class="lg-font-size headerFont mb-8">
+                                    Features Included
                                 </div>
-                                <div class="grid mt-10">
-                                    <div class="flex items-center">
-                                        <div class="mr-3 flex justify-center items-center" style="width:60px; height:60px; border-radius:50%; border:2px solid #000">
-                                            <i style="font-size:30px" class="fas fa-chart-line"></i>
+                                <div class="sm:flex gap-10" style="flex-wrap: wrap;">
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-fire"></i>
                                         </div>
-                                        <div class="ml-3 flex-1 sm-font-size bodyFont">
-                                            <div style="font-weight: bold;">Financial Reporting</div>
-                                            <i class="far fa-check-circle" style="color: var(--green);"></i>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Heat
+                                            </div>
+                                            <i v-if="showDetails.property.utilities.heat" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-tint"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Water
+                                            </div>
+                                            <i v-if="showDetails.property.utilities.water" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-bolt"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Hydro
+                                            </div>
+                                            <i v-if="showDetails.property.utilities.hydro" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-wifi"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Internet
+                                            </div>
+                                            <i v-if="showDetails.property.utilities.internet" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-couch"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Furnished
+                                            </div>
+                                            <i v-if="showDetails.property.features.furnished" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-tshirt"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Laundry
+                                            </div>
+                                            <i v-if="showDetails.property.features.laundry" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-hands-wash"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Dishwasher
+                                            </div>
+                                            <i v-if="showDetails.property.features.dishwasher" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-city"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Balcony
+                                            </div>
+                                            <i v-if="showDetails.property.features.balcony" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center features-list-item">
+                                        <div class="mr-3 flex justify-center items-center" style="width:40px; height:40px; border-radius:50%; border:2px solid #000">
+                                            <i style="font-size:20px" class="fas fa-paw"></i>
+                                        </div>
+                                        <div class="flex-1 sm-font-size bodyFont">
+                                            <div style="font-weight: bold;">
+                                                Pets
+                                            </div>
+                                            <i v-if="showDetails.property.features.pets" class="far fa-check-circle" style="color: var(--green);"></i>
+                                            <i v-else class="far fa-times-circle" style="color: var(--red);"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -189,21 +296,83 @@
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
-                                heat:false,
+                                heat:true,
                                 water:false,
-                                hydro:false,
+                                hydro:true,
                                 internet:false
                             },
                             features:{
-                                beds:1,
-                                baths:1,
+                                beds:2,
+                                baths:2,
                                 sqft:600,
-                            },
-                            other:{
-                                furnished:false,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
+                                furnished:true,
+                                laundry:false,
+                                dishwasher:true,
+                                balcony:false,
+                                pets:true,
+                            },
+                            agreementType:'1 Year',
+                        },
+                        {
+                            image:'/assets/properties/placeholder.jpg',
+                            featuredImages:[],
+                            type:'Highrise',
+                            status:'Available',
+                            address:'215 Queen St E, Brampton, ON L6W 0A9',
+                            price:1895,
+                            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
+                            date:'May 1, 2021',
+                            utilities:{
+                                heat:true,
+                                water:false,
+                                hydro:true,
+                                internet:false
+                            },
+                            features:{
+                                beds:2,
+                                baths:2,
+                                sqft:600,
+                                parking:1,
+                                garage:0,
+                                exposure:'',
+                                furnished:true,
+                                laundry:false,
+                                dishwasher:true,
+                                balcony:false,
+                                pets:true,
+                            },
+                            agreementType:'1 Year',
+                        },
+                        {
+                            image:'/assets/properties/placeholder.jpg',
+                            featuredImages:[],
+                            type:'Highrise',
+                            status:'Available',
+                            address:'215 Queen St E, Brampton, ON L6W 0A9',
+                            price:1895,
+                            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
+                            date:'May 1, 2021',
+                            utilities:{
+                                heat:true,
+                                water:false,
+                                hydro:true,
+                                internet:false
+                            },
+                            features:{
+                                beds:2,
+                                baths:2,
+                                sqft:600,
+                                parking:1,
+                                garage:0,
+                                exposure:'',
+                                furnished:true,
+                                laundry:false,
+                                dishwasher:true,
+                                balcony:false,
+                                pets:true,
                             },
                             agreementType:'1 Year',
                         },
@@ -216,21 +385,23 @@
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
-                                heat:false,
+                                heat:true,
                                 water:false,
-                                hydro:false,
+                                hydro:true,
                                 internet:false
                             },
                             features:{
                                 beds:2,
                                 baths:2,
                                 sqft:1200,
-                            },
-                            other:{
-                                furnished:false,
                                 parking:1,
                                 garage:0,
                                 exposure:'',
+                                furnished:true,
+                                laundry:false,
+                                dishwasher:true,
+                                balcony:false,
+                                pets:true,
                             },
                             agreementType:'1 Year',
                         },

@@ -45,7 +45,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--lightblue); 
+    background: var(--darkorange); 
 }
 
 
@@ -461,6 +461,12 @@ dt.expanded {
 .faq-tabs {
     cursor: pointer;
 }
+@media screen and (max-width: 640px){
+    .features-list-item:not(:first-child) {
+        margin-top: 1.25em;
+    }
+}
+
 
 
 /* Main Page */
