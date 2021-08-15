@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="tailwind.min.css">
         <link rel="stylesheet" href="styles.css">
         <script src="vue.js"></script>
+        <script src="https://kit.fontawesome.com/f086bec7e5.js" crossorigin="anonymous"></script>
         <!-- <script src="vue.min.js"></script> -->
     </head>
     <body>
@@ -18,8 +19,19 @@
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
                         <h1 class="py-10 headerFont xl-font-size">Available Properties</h1>
-                        <div class="mt-8">
-                            aasfa
+                        <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-14 sm:gap-16 lg:gap-20">
+                            <template v-for="(prop,propI) in properties">
+                                <div class="w-full">
+                                    <div class="img-holder-box">
+                                        <img class="img-cover" src="/assets/properties/placeholder.jpg" />
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-bed"></i>
+                                        <i class="fas fa-bath"></i>
+                                        <i class="fas fa-ruler-combined"></i>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -35,7 +47,27 @@
             new Vue({
                 el: '#vue-home',
                 data:{
-                    showMenu: false
+                    showMenu: false,
+                    properties:[
+                        {
+                            image:'',
+                            imagex2:'',
+                            status:'',
+                            address:'',
+                            price:'',
+                            description:'',
+                            date:'',
+                            exposure:'',
+                            furnished:false,
+                            utilities:{
+
+                            },
+                            features:{
+
+                            },
+                            agreementType:'',
+                        },
+                    ]
                 },
                 methods:{
                     toggleMenu(){
