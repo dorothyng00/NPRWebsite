@@ -513,6 +513,20 @@ dt.expanded {
 .img-holder-box:hover .img-cover {
     transform:scale(1.1);
 }
+.propimg-holder-box {
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 50%;
+    position: relative;
+}
+.propimg-cover {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
 
 
