@@ -4,7 +4,7 @@ footer.innerHTML = `
     <div class="container mx-auto">
         <div style="padding:5%">
             <img class="hidden md:block mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white.png" style="object-fit: contain; max-width:250px" />
-            <img class="md:hidden mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white-simple.png" style="object-fit: contain; width:100px" />
+            <img class="md:hidden mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white-simple.png" style="object-fit: contain; width:80px" />
             <div class="md:flex justify-between mt-8">
                 <div style="color:white">
                     <div class="text-center md:text-left sm-font-size bodyFont mb-2">Follow us</div>
