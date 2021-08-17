@@ -8,8 +8,10 @@
         
         <link rel="stylesheet" href="tailwind.min.css">
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
         <script src="vue.js"></script>
         <script src="https://kit.fontawesome.com/f086bec7e5.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
         <!-- <script src="vue.min.js"></script> -->
     </head>
     <body>
@@ -32,38 +34,58 @@
                 <div class="md-padding-y">
                     <div class="container mx-auto">
                         <div style="padding-left: 5%; padding-right: 5%;">
-                            <div class="w-full py-10 grid grid-cols-3 gap-16" style="color: var(--black);">
-                                <div>
-                                    <div class="md-font-size headerFont">
+                            <div class="w-full py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-16" style="color: var(--black);">
+                                <div class="text-center sm:text-left">
+                                    <div class="md-font-size headerFont" style="font-weight: bold;">
                                         Contact Details
                                     </div>
                                     <div class="mt-3 sm-font-size bodyFont">
                                         <div>
-                                            <a href="mailto:info@northpointrealty.ca">Email: info@northpointrealty.ca</a>
+                                            Email: <a href="mailto:info@northpointrealty.ca"><span style="color: var(--darkorange);">info@northpointrealty.ca</span></a>
                                         </div>
                                         <div>
-                                            <a href="tel:6476700354">Phone: (647) 670-0354</a>
+                                            Phone: <a href="tel:6476700354"><span style="color: var(--darkorange);">(647) 670-0354</span></a>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="md-font-size headerFont">
+                                <div class="text-center sm:text-left">
+                                    <div class="md-font-size headerFont" style="font-weight: bold;">
                                         Hours of Operation
                                     </div>
                                     <div class="mt-3 sm-font-size bodyFont">
-                                        <div>
-                                            <b>Mon - Fri</b> 11:00 AM - 7:00 PM<br>
-                                            Sat 11:00 AM - 7:00 PM<br>
-                                            Sun 11:00 AM - 7:00 PM<br>
+                                        <div class="flex justify-center sm:justify-start">
+                                            <div style="font-weight: bold;">
+                                                Mon - Fri<br>
+                                                Sat<br>
+                                                Sun
+                                            </div>
+                                            <div class="ml-8">
+                                                11:00 AM - 7:00 PM<br>
+                                                11:00 AM - 5:00 PM<br>
+                                                CLOSED
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-
+                                <div class="text-center sm:text-left">
+                                    <div class="md-font-size headerFont" style="font-weight: bold;">
+                                        Head Office
+                                    </div>
+                                    <div class="mt-3 sm-font-size bodyFont">
+                                        <div style="color: var(--darkorange);">
+                                            <a href="https://www.google.com/maps/place/47+Redlea+Ave,+Scarborough,+ON+M1V+4S3/@43.8229972,-79.3067769,17z/data=!3m1!4b1!4m5!3m4!1s0x89d4d409ca12b983:0x80d7b553ec37f208!8m2!3d43.8229972!4d-79.3045882" target="_target">
+                                                47 Redlea Ave<br>
+                                                Scarborough, ON
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="map-holder-box">
+                    <div id="map" class="map-cover-box"></div>
                 </div>
                 <div id="footer"></div>
             </div>
@@ -77,7 +99,33 @@
             new Vue({
                 el: '#vue-home',
                 data:{
-                    showMenu: false
+                    showMenu: false,
+                    map:null,
+                    selectedCat:'dev',
+                    vectorLayer:null,
+                    selectedMarker:{},
+                    mapData:{
+                        data:{
+                            markers:{
+                                mark1:{
+                                    name:'Test Marker',
+                                    image:'',
+                                    rating:0,
+                                    address:'',
+                                    geometry:{
+                                        location:{
+                                            lat:44.080326,
+                                            lng:-79.7811661
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        name:'',
+                        logo:'/assets/logo-black-simple.png',
+                        lat:43.8229972,
+                        lng:-79.3067769
+                    }
                 },
                 methods:{
                     toggleMenu(){
@@ -85,13 +133,137 @@
                     },
                     navigateHome(){
                         location.href='/src/'
-                    }
-                },
-                computed:{
+                    },
 
+                    selectMarker(marker) {
+                        if(Object.keys(this.selectedMarker).length != 0) this.selectedMarker.closeInfoWindow()
+                        let self = this
+                        let found = self.vectorLayer._geoList.find(x => x._coordinates.x == marker.geometry.location.lng && x._coordinates.y == marker.geometry.location.lat)
+                        self.selectedMarker = found
+                        // console.log('marker', marker, this.map, this.vectorLayer)
+                        if(self.selectedMarker) {
+                            self.selectedMarker.openInfoWindow()
+                        }
+                    },
                 },
                 mounted(){
+                    console.log('MOUNTED RAN')
+                    let self = this
 
+                    this.map = new maptalks.Map('map', {
+                        center: [self.mapData.lng, self.mapData.lat],
+                        scrollWheelZoom:false,
+                        zoom: 12,
+                        zoomControl: {
+                            'position'  : 'bottom-right',
+                            'slider'    : false,
+                            'zoomLevel' : false
+                        },
+                        minZoom: 12,
+                        maxZoom: 16,
+                        baseLayer: new maptalks.TileLayer('base', {
+                        'urlTemplate' : `http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png`,
+                        'subdomains'  : ['a','b','c','d'],
+                        'attribution'  : '&copy; <a href="http://www.osm.org/copyright">OSM</a> contributors, '+
+                        '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+                        })
+                    });
+                    let dev = new maptalks.Marker(
+                        [self.mapData.lng, self.mapData.lat],
+                        {
+                            cursor : 'pointer',
+                            'symbol' : {
+                                'markerFile'   : `${self.mapData.logo}`,
+                                'markerWidth'  : 60,
+                                'markerHeight' : 60,
+                                'markerDx'     : 0,
+                                'markerDy'     : 0,
+                                'markerOpacity': 1
+                            }
+                        }
+                    )
+                    this.vectorLayer = new maptalks.VectorLayer('vector', {
+                        enableAltitude: true,
+                        drawAltitude: {
+                            lineWidth: 2,
+                            lineColor: '#aaa'
+                        }
+                    }).addTo(self.map)
+    
+                    dev.addTo(self.vectorLayer)
+
+                    let pinnedHTML = ''
+                    pinnedHTML = '<i style="position: absolute;top: -10px;left: -10px;background: rgba(255,255,255,0.8);padding: 4px;border-radius: 50%;box-shadow: 1px 2px 4px rgba(100,100,100,0.3);" aria-label="icon: pushpin" class="anticon anticon-pushpin"><svg viewBox="64 64 896 896" data-icon="pushpin" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M878.3 392.1L631.9 145.7c-6.5-6.5-15-9.7-23.5-9.7s-17 3.2-23.5 9.7L423.8 306.9c-12.2-1.4-24.5-2-36.8-2-73.2 0-146.4 24.1-206.5 72.3a33.23 33.23 0 0 0-2.7 49.4l181.7 181.7-215.4 215.2a15.8 15.8 0 0 0-4.6 9.8l-3.4 37.2c-.9 9.4 6.6 17.4 15.9 17.4.5 0 1 0 1.5-.1l37.2-3.4c3.7-.3 7.2-2 9.8-4.6l215.4-215.4 181.7 181.7c6.5 6.5 15 9.7 23.5 9.7 9.7 0 19.3-4.2 25.9-12.4 56.3-70.3 79.7-158.3 70.2-243.4l161.1-161.1c12.9-12.8 12.9-33.8 0-46.8zM666.2 549.3l-24.5 24.5 3.8 34.4a259.92 259.92 0 0 1-30.4 153.9L262 408.8c12.9-7.1 26.3-13.1 40.3-17.9 27.2-9.4 55.7-14.1 84.7-14.1 9.6 0 19.3.5 28.9 1.6l34.4 3.8 24.5-24.5L608.5 224 800 415.5 666.2 549.3z"></path></svg></i>'
+    
+                    dev.setInfoWindow({
+                        //'autoOpenOn' : 'click',  //set to null if not to open window when clicking on map
+                        'autoCloseOn': 'click',
+                        'single': false,
+                        'width': 383,
+                        'height': 105,
+                        'custom': true,
+                        'dx': 0,
+                        'dy': -20,
+                        'content': `<div class="infobox-content relative">
+                            ${pinnedHTML}
+                            <div style="padding: 10px 20px; max-width: 180px;">${this.mapData.name}</div>
+                            </div>`
+                    });
+
+                    setTimeout( () => {
+                        let list = Object.values(this.mapData.data.markers)
+                        console.log('LIST', list)
+                        list.forEach(x => {
+                            console.log('x', x)
+                            let iconUrl = self.mapData.data.icon
+                            let marker = new maptalks.Marker(
+                                [x.geometry.location.lng, x.geometry.location.lat],
+                                {
+                                    cursor : 'pointer',
+                                    'symbol' : {
+                                        'markerFile'   : iconUrl || '',
+                                        'markerWidth'  : 50,
+                                        'markerHeight' : 50,
+                                        'markerDx'     : 0,
+                                        'markerDy'     : 0,
+                                        'markerOpacity': 1
+                                    }
+                                }
+                            )
+                            marker.addTo(self.vectorLayer)
+            
+                            marker.setInfoWindow({
+                                'autoCloseOn': 'click',
+                                'single': false,
+                                'width': 383,
+                                'height': 105,
+                                'custom': true,
+                                'dx': 0,
+                                'dy': -20,
+                                'content': `<div class="infobox-content relative">
+                                        <div class="pop_title" style="width: 180px; max-width: 180px; height: 100px; max-height: 100px; overflow: hidden; display: ${!x.image? 'none' : ''}">
+                                            <center>
+                                                <img src="${x.image}" style="width: 100%; height: 100%; display: ${!x.image? 'none' : ''}" />
+                                            </center>
+                                        </div>
+                                        <div style="padding: 10px 20px 0 20px; max-width: 180px;">${x.name}</div>
+                                        <div style="padding: 0 20px 0 20px; display:flex; align-items:center">${!x.rating? '' : `${x.rating} `} ${x.rating == 5? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
+                                        : x.rating > 4 && x.rating < 5? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' 
+                                        : x.rating == 4? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
+                                        : x.rating > 3 && x.rating < 4? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' 
+                                        : x.rating == 3? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
+                                        : x.rating > 2 && x.rating < 3? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>'
+                                        : x.rating == 2? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
+                                        : x.rating > 1 && x.rating < 2? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' 
+                                        : x.rating == 1? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
+                                        : x.rating > 0 && x.rating < 1? '<svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' : '' || ''}</div>
+                                        <div style="padding: 0 20px 0 20px; max-width: 180px; font-size:12px">${x.formatted_address ? x.formatted_address : ''}</div>
+                                        <div style="padding: 0 20px 10px 20px;" class="arrow"></div>
+                                        </div>`
+                            });
+                        })
+                    }, 500)
+                        
                 },
                 created(){
 

@@ -568,6 +568,31 @@ dt.expanded {
     object-fit:cover;
 }
 
+@media screen and (min-width: 768px){
+    .map-holder-box {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 33%;
+        position: relative;
+    }
+}
+@media screen and (max-width: 768px){
+    .map-holder-box {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 75%;
+        position: relative;
+    }
+}
+
+.map-cover {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
 
 /* Modal Classes */

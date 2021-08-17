@@ -14,7 +14,7 @@
     </head>
     <body>
         <div id="vue-home">
-            <div id="nav-bar"></div>
+            <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
             <div v-if="showDetails.visible" class="fixed w-screen h-screen hidden items-center justify-center top-0 left-0" :class="showDetails.visible ? 'isActive' : 'notActive'" style="z-index: 200;">
                 <div class="w-full h-full flex justify-center items-center">
                     <div @click="closeViewDetails()" class="absolute w-full h-full details-mask-overlay"></div>
@@ -228,7 +228,20 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full" :style="[showMenu ? {'overflow':'hidden', 'max-height':'calc(100vh - 100px)'} : {'':''}]">
+            <div class="w-full" :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
+                <div class="hero-img-card relative">
+                    <div class="absolute w-full h-full" style="z-index: 2; color:white">
+                        <div class="mx-auto container w-full h-full">
+                            <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
+                                <div class="w-full md:w-1/2">
+                                    <div class="xl-font-size heroHeaderFont">Properties</div>
+                                    <div class="sm-font-size bodyFont mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="/assets/hero-placeholder2.jpg" class="hero-img-cover" />
+                </div>
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
                         <h1 class="headerFont xl-font-size">Available Properties</h1>
@@ -272,7 +285,7 @@
             </div>
         </div>
 
-        <script src="navbar-black.js"></script>
+        <script src="navbar.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
         
