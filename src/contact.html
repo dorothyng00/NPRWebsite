@@ -15,9 +15,9 @@
         <!-- <script src="vue.min.js"></script> -->
     </head>
     <body>
-        <div id="vue-home">
+        <div id="vue-home" style="overflow-x: hidden;">
             <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
-            <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
+            <div style="overflow-x: hidden;" :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
                 <div class="hero-img-card relative">
                     <div class="absolute w-full h-full" style="z-index: 2; color:white">
                         <div class="mx-auto container w-full h-full">
@@ -84,8 +84,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="map-holder-box">
-                    <div id="map" class="map-cover-box"></div>
+                <div class="map-container">
+                    <div id="map" class="w-full h-full"></div>
                 </div>
                 <div id="footer"></div>
             </div>
@@ -121,7 +121,7 @@
                                 }
                             }
                         },
-                        name:'',
+                        name:'North Point Realty Inc.',
                         logo:'/assets/logo-black-simple.png',
                         lat:43.8229972,
                         lng:-79.3067769
@@ -149,73 +149,40 @@
                 mounted(){
                     console.log('MOUNTED RAN')
                     let self = this
-
+                    let x = this.mapData
                     this.map = new maptalks.Map('map', {
-                        center: [self.mapData.lng, self.mapData.lat],
-                        scrollWheelZoom:false,
-                        zoom: 12,
-                        zoomControl: {
-                            'position'  : 'bottom-right',
-                            'slider'    : false,
-                            'zoomLevel' : false
-                        },
-                        minZoom: 12,
-                        maxZoom: 16,
-                        baseLayer: new maptalks.TileLayer('base', {
-                        'urlTemplate' : `http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png`,
-                        'subdomains'  : ['a','b','c','d'],
-                        'attribution'  : '&copy; <a href="http://www.osm.org/copyright">OSM</a> contributors, '+
-                        '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-                        })
-                    });
-                    let dev = new maptalks.Marker(
-                        [self.mapData.lng, self.mapData.lat],
-                        {
-                            cursor : 'pointer',
-                            'symbol' : {
-                                'markerFile'   : `${self.mapData.logo}`,
-                                'markerWidth'  : 60,
-                                'markerHeight' : 60,
-                                'markerDx'     : 0,
-                                'markerDy'     : 0,
-                                'markerOpacity': 1
-                            }
-                        }
-                    )
-                    this.vectorLayer = new maptalks.VectorLayer('vector', {
-                        enableAltitude: true,
-                        drawAltitude: {
-                            lineWidth: 2,
-                            lineColor: '#aaa'
-                        }
-                    }).addTo(self.map)
-    
-                    dev.addTo(self.vectorLayer)
+						center: [x.lng, x.lat],
+						scrollWheelZoom:false,
+						zoom: 12,
+						zoomControl: {
+							'position'  : 'bottom-right',
+							'slider'    : false,
+							'zoomLevel' : false
+						},
+						minZoom: 12,
+                		maxZoom: 16,
+						baseLayer: new maptalks.TileLayer('base', {
+						'urlTemplate' : `http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png`,
+						'subdomains'  : ['a','b','c','d'],
+						'attribution'  : '&copy; <a href="http://www.osm.org/copyright">OSM</a> contributors, '+
+						'&copy; <a href="https://carto.com/attributions">CARTO</a>',
+						})
+					});
+                    
 
-                    let pinnedHTML = ''
-                    pinnedHTML = '<i style="position: absolute;top: -10px;left: -10px;background: rgba(255,255,255,0.8);padding: 4px;border-radius: 50%;box-shadow: 1px 2px 4px rgba(100,100,100,0.3);" aria-label="icon: pushpin" class="anticon anticon-pushpin"><svg viewBox="64 64 896 896" data-icon="pushpin" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M878.3 392.1L631.9 145.7c-6.5-6.5-15-9.7-23.5-9.7s-17 3.2-23.5 9.7L423.8 306.9c-12.2-1.4-24.5-2-36.8-2-73.2 0-146.4 24.1-206.5 72.3a33.23 33.23 0 0 0-2.7 49.4l181.7 181.7-215.4 215.2a15.8 15.8 0 0 0-4.6 9.8l-3.4 37.2c-.9 9.4 6.6 17.4 15.9 17.4.5 0 1 0 1.5-.1l37.2-3.4c3.7-.3 7.2-2 9.8-4.6l215.4-215.4 181.7 181.7c6.5 6.5 15 9.7 23.5 9.7 9.7 0 19.3-4.2 25.9-12.4 56.3-70.3 79.7-158.3 70.2-243.4l161.1-161.1c12.9-12.8 12.9-33.8 0-46.8zM666.2 549.3l-24.5 24.5 3.8 34.4a259.92 259.92 0 0 1-30.4 153.9L262 408.8c12.9-7.1 26.3-13.1 40.3-17.9 27.2-9.4 55.7-14.1 84.7-14.1 9.6 0 19.3.5 28.9 1.6l34.4 3.8 24.5-24.5L608.5 224 800 415.5 666.2 549.3z"></path></svg></i>'
-    
-                    dev.setInfoWindow({
-                        //'autoOpenOn' : 'click',  //set to null if not to open window when clicking on map
-                        'autoCloseOn': 'click',
-                        'single': false,
-                        'width': 383,
-                        'height': 105,
-                        'custom': true,
-                        'dx': 0,
-                        'dy': -20,
-                        'content': `<div class="infobox-content relative">
-                            ${pinnedHTML}
-                            <div style="padding: 10px 20px; max-width: 180px;">${this.mapData.name}</div>
-                            </div>`
-                    });
-
-                    setTimeout( () => {
+                    // Add markers here
+                    setTimeout(() => {
                         let list = Object.values(this.mapData.data.markers)
-                        console.log('LIST', list)
+                        if (this.vectorLayer) this.map.removeLayer(this.vectorLayer);
+                        this.vectorLayer = new maptalks.VectorLayer('vector', {
+                            enableAltitude: true,
+                            drawAltitude: {
+                                lineWidth: 2,
+                                lineColor: '#aaa'
+                            }
+                        }).addTo(self.map);
                         list.forEach(x => {
-                            console.log('x', x)
-                            let iconUrl = self.mapData.data.icon
+                            let iconUrl = self.mapData.logo
                             let marker = new maptalks.Marker(
                                 [x.geometry.location.lng, x.geometry.location.lat],
                                 {
@@ -231,7 +198,7 @@
                                 }
                             )
                             marker.addTo(self.vectorLayer)
-            
+                            
                             marker.setInfoWindow({
                                 'autoCloseOn': 'click',
                                 'single': false,
@@ -262,8 +229,36 @@
                                         </div>`
                             });
                         })
+                        let dev = new maptalks.Marker(
+                            [self.mapData.lng, self.mapData.lat],
+                            {
+                                cursor : 'pointer',
+                                'symbol' : {
+                                    'markerFile'   : self.mapData.logo,
+                                    'markerWidth'  : 60,
+                                    'markerHeight' : 60,
+                                    'markerDx'     : 0,
+                                    'markerDy'     : 0,
+                                    'markerOpacity': 1
+                                }
+                            }
+                        )
+                        dev.addTo(self.vectorLayer)
+
+                        dev.setInfoWindow({
+                            //'autoOpenOn' : 'click',  //set to null if not to open window when clicking on map
+                            'autoCloseOn': 'click',
+                            'single': false,
+                            'width': 383,
+                            'height': 105,
+                            'custom': true,
+                            'dx': 0,
+                            'dy': -20,
+                            'content': `<div class="infobox-content relative">
+                                <div style="padding: 10px 20px; max-width: 180px;">${this.mapData.name || 'Development Location'}</div>
+                                </div>`
+                        });
                     }, 500)
-                        
                 },
                 created(){
 
