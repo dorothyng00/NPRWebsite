@@ -3,8 +3,8 @@ footer.innerHTML = `
 <div class="w-full" style="background-color:var(--darkblue);">
     <div class="container mx-auto">
         <div style="padding:5%">
-            <img class="hidden md:block mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white.png" style="object-fit: contain; max-width:250px; cursor: pointer;" />
-            <img class="md:hidden mx-auto md:mx-0" @click="navigateHome()" src="/assets/logo-white-simple.png" style="object-fit: contain; width:80px; cursor: pointer;" />
+            <img class="hidden md:block mx-auto md:mx-0" @click="navigateHome()" src="assets/logo-white.png" style="object-fit: contain; max-width:250px; cursor: pointer;" />
+            <img class="md:hidden mx-auto md:mx-0" @click="navigateHome()" src="assets/logo-white-simple.png" style="object-fit: contain; width:80px; cursor: pointer;" />
             <div class="md:flex justify-between mt-8">
                 <div style="color:white">
                     <div class="text-center md:text-left md-font-size bodyFont mb-2">
@@ -20,14 +20,14 @@ footer.innerHTML = `
                     <div class="text-center md:text-left md-font-size bodyFont mb-2">Navigate</div>
                     <div class="text-center md:text-left xs-font-size bodyFont md:flex">
                         <div>
-                            <div><a href="/property-management">Property Management</a></div>
-                            <div><a href="/tenant-placement">Tenant Placement</a></div>
-                            <div><a href="/tenant-rental-application">Tenant Rental Application</a></div>
+                            <div><a href="/NPRWebsite/property-management">Property Management</a></div>
+                            <div><a href="/NPRWebsite/tenant-placement">Tenant Placement</a></div>
+                            <div><a href="/NPRWebsite/tenant-rental-application">Tenant Rental Application</a></div>
                         </div>
                         <div class="md:ml-10">
-                            <div><a href="/faq">FAQ</a></div>
-                            <div><a href="/contact">Contact Us</a></div>
-                            <div><a href="/properties">Properties</a></div>
+                            <div><a href="/NPRWebsite/faq">FAQ</a></div>
+                            <div><a href="/NPRWebsite/contact">Contact Us</a></div>
+                            <div><a href="/NPRWebsite/properties">Properties</a></div>
                         </div>
                     </div>
                 </div>
