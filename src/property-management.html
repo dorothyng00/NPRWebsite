@@ -21,8 +21,9 @@
                         <div class="mx-auto container w-full h-full">
                             <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
                                 <div class="w-full md:w-1/2">
-                                    <div class="xl-font-size heroHeaderFont">Property Management</div>
-                                    <div class="sm-font-size bodyFont mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                    <div class="xl-font-size heroHeaderFont text-center md:text-left">Property Management</div>
+                                    <div class="sm-font-size bodyFont mt-3 text-center md:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                    <div class="flex justify-center md:justify-start"><button onclick="document.location = '#plans'" class="solidButton mt-5 px-5 py-2">View Available Plans</button></div>
                                 </div>
                             </div>
                         </div>
@@ -100,96 +101,170 @@
                         </div>
                     </div>
                 </div>
-                <div class="lg-padding-y" style="background-color: var(--offwhite);">
-                    <div class="container mx-auto">
+                <div id="plans" class="lg-padding-y" style="background-color: var(--offwhite);">
+                    <div class="container mx-auto py-10 md:py-0">
                         <div style="padding:0 5%;">
                             <div class="lg-font-size bodyFont text-center">Select your plan</div>
                             <div class="sm-font-size bodyFont text-center mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                            <div class="flex" style="margin-top: 150px;">
-                                <div class="relative" style="border-radius: 7px; border:solid 1px #000">
-                                    <div class="absolute w-full" style="margin-top:-100px">
-                                        <div class="flex justify-center items-center">
-                                            <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:var(--gray); padding:20px">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <div class="bodyFont sm-font-size text-center">Silver Plan</div>
-                                                        <div class="bodyFont xxl-font-size text-center">2%</div>
-                                                        <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                            <div class="flex justify-center">
+                                <div class="md:flex" style="margin-top: 150px;">
+                                    <div class="relative mr-0 md:mr-7" style="border-radius: 7px; border:solid 1px #000">
+                                        <div class="absolute w-full" style="margin-top:-100px">
+                                            <div class="flex justify-center items-center">
+                                                <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:var(--gray); padding:20px">
+                                                    <div class="flex items-center">
+                                                        <div>
+                                                            <div class="bodyFont sm-font-size text-center">Silver Plan</div>
+                                                            <div class="bodyFont xxl-font-size text-center">2%</div>
+                                                            <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="p-10" style="padding-top:120px">
+                                            <div class="flex items-center">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
+                                            </div>
+                                            <div class="flex items-center mt-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Communication</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Maintenance & Repairs</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Rent Collection</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Move-in & Move-out Inspections</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Financial Reporting</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Eviction Protection & Legal Services</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Professional Photos</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>360 Virtual Tour Video</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Free Tenant Placement</div>
+                                            </div>
+                                            <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
+                                                <button onclick="document.location = '/src/contact.html'" class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="p-7" style="padding-top:120px">
-                                        <div class="flex items-center">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
-                                        </div>
-                                        <div class="flex items-center mt-3">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
-                                        </div>
-                                        <div class="flex items-center mt-3 mb-3">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
-                                        </div>
-                                        <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
-                                            <button class="solidButton px-5 py-2 mt-3">Contact Us</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="relative" style="border-radius: 7px; border:solid 1px #000">
-                                    <div class="absolute w-full" style="margin-top:-100px">
-                                        <div class="flex justify-center items-center">
-                                            <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:#f6b221; padding:20px">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <div class="bodyFont sm-font-size text-center">Gold Plan</div>
-                                                        <div class="bodyFont xxl-font-size text-center">5%</div>
-                                                        <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                    <div class="relative mt-36 md:mt-0 mr-0 md:mr-7" style="border-radius: 7px; border:solid 1px #000">
+                                        <div class="absolute w-full" style="margin-top:-100px">
+                                            <div class="flex justify-center items-center">
+                                                <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:#f6b221; padding:20px">
+                                                    <div class="flex items-center">
+                                                        <div>
+                                                            <div class="bodyFont sm-font-size text-center">Gold Plan</div>
+                                                            <div class="bodyFont xxl-font-size text-center">5%</div>
+                                                            <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="p-7" style="padding-top:120px">
+                                            <div class="flex items-center">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
+                                            </div>
+                                            <div class="flex items-center mt-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Communication</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Maintenance & Repairs</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Rent Collection</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Move-in & Move-out Inspections</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Financial Reporting</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Eviction Protection & Legal Services</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Professional Photos</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>360 Virtual Tour Video</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3" style="color:#737680">
+                                                <i class="far fa-times-circle mr-3" style="color: var(--red);"></i><div>Free Tenant Placement</div>
+                                            </div>
+                                            <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
+                                                <button onclick="document.location = '/src/contact.html'" class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="p-7" style="padding-top:120px">
-                                        <div class="flex items-center">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
-                                        </div>
-                                        <div class="flex items-center mt-3">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
-                                        </div>
-                                        <div class="flex items-center mt-3 mb-3">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
-                                        </div>
-                                        <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
-                                            <button class="solidButton px-5 py-2 mt-3">Contact Us</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="relative" style="border-radius: 7px; border:solid 1px #000">
-                                    <div class="absolute w-full" style="margin-top:-100px">
-                                        <div class="flex justify-center items-center">
-                                            <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:#e5e4e2; padding:20px">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <div class="bodyFont sm-font-size text-center">Platinum Plan</div>
-                                                        <div class="bodyFont xxl-font-size text-center">8%</div>
-                                                        <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                    <div class="relative mt-36 md:mt-0" style="border-radius: 7px; border:solid 1px #000">
+                                        <div class="absolute w-full" style="margin-top:-100px">
+                                            <div class="flex justify-center items-center">
+                                                <div class="flex justify-center" style="width:200px; height:200px; border-radius: 50%; border:1px solid #000; background-color: black; color:#e5e4e2; padding:20px">
+                                                    <div class="flex items-center">
+                                                        <div>
+                                                            <div class="bodyFont sm-font-size text-center">Platinum Plan</div>
+                                                            <div class="bodyFont xxl-font-size text-center">8%</div>
+                                                            <div class="bodyFont xs-font-size text-center">of Monthly Rent</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="p-7" style="padding-top:120px">
-                                        <div class="flex items-center">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
-                                        </div>
-                                        <div class="flex items-center mt-3">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
-                                        </div>
-                                        <div class="flex items-center mt-3 mb-3">
-                                            <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
-                                        </div>
-                                        <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
-                                            <button class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                        <div class="p-7" style="padding-top:120px">
+                                            <div class="flex items-center">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Yearly Lease Renewal</div>
+                                            </div>
+                                            <div class="flex items-center mt-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Guarantee</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Tenant Communication</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Maintenance & Repairs</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Rent Collection</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Move-in & Move-out Inspections</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Financial Reporting</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Eviction Protection & Legal Services</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Professional Photos</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>360 Virtual Tour Video</div>
+                                            </div>
+                                            <div class="flex items-center mt-3 mb-3">
+                                                <i class="far fa-check-circle mr-3" style="color: var(--green);"></i><div>Free Tenant Placement</div>
+                                            </div>
+                                            <div class="flex justify-center" style="border-top:#c3c3c3 solid 1px">
+                                                <button onclick="document.location = '/src/contact.html'" class="solidButton px-5 py-2 mt-3">Contact Us</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
