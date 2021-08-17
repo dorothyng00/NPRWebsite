@@ -17,13 +17,13 @@ navbar.innerHTML = `
           <span class="bar" :style="[showMenu ? {'background-color':'#000'} : {'':''}]"></span>
         </div>
       </div>
-      <li class="nav-item"><a href="/src/">Home</a></li>
-      <li class="nav-item"><a href="/src/property-management.html">Property Management</a></li>
-      <li class="nav-item"><a href="/src/tenant-placement.html">Tenant Placement</a></li>
-      <li class="nav-item"><a href="/src/tenant-rental-application.html">Tenant Rental Application</a></li>
-      <li class="nav-item"><a href="/src/faq.html">FAQ</a></li>
-      <li class="nav-item"><a href="/src/contact.html">Contact Us</a></li>
-      <li class="nav-item"><a href="/src/properties.html">Properties</a></li>
+      <li class="nav-item"><a href="/">Home</a></li>
+      <li class="nav-item"><a href="/property-management.html">Property Management</a></li>
+      <li class="nav-item"><a href="/tenant-placement.html">Tenant Placement</a></li>
+      <li class="nav-item"><a href="/tenant-rental-application.html">Tenant Rental Application</a></li>
+      <li class="nav-item"><a href="/faq.html">FAQ</a></li>
+      <li class="nav-item"><a href="/contact.html">Contact Us</a></li>
+      <li class="nav-item"><a href="/properties.html">Properties</a></li>
     </ul>
   </nav>
   </div>

@@ -15,9 +15,9 @@
         <!-- <script src="vue.min.js"></script> -->
     </head>
     <body>
-        <div id="vue-home" style="overflow-x: hidden;">
+        <div id="vue-home">
             <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
-            <div style="overflow-x: hidden;" :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
+            <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
                 <div class="hero-img-card relative">
                     <div class="absolute w-full h-full" style="z-index: 2; color:white">
                         <div class="mx-auto container w-full h-full">
@@ -132,7 +132,7 @@
                         this.showMenu = !this.showMenu
                     },
                     navigateHome(){
-                        location.href='/src/'
+                        location.href='/'
                     },
 
                     selectMarker(marker) {

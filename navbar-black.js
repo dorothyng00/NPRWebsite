@@ -9,13 +9,13 @@ navbar.innerHTML = `
       <span class="bar" style="background-color: #000;"></span>
     </div>
     <ul class="sm-font-size bodyFont nav no-search" :class="showMenu ? 'mobile-nav' : ''" style="line-height: 1.2;">
-      <li class="nav-item-black"><a href="/src/">Home</a></li>
-      <li class="nav-item-black"><a href="/src/property-management.html">Property Management</a></li>
-      <li class="nav-item-black"><a href="/src/tenant-placement.html">Tenant Placement</a></li>
-      <li class="nav-item-black"><a href="/src/tenant-rental-application.html">Tenant Rental Application</a></li>
-      <li class="nav-item-black"><a href="/src/faq.html">FAQ</a></li>
-      <li class="nav-item-black"><a href="/src/contact.html">Contact Us</a></li>
-      <li class="nav-item-black"><a href="/src/properties.html">Properties</a></li>
+      <li class="nav-item-black"><a href="/">Home</a></li>
+      <li class="nav-item-black"><a href="/property-management.html">Property Management</a></li>
+      <li class="nav-item-black"><a href="/tenant-placement.html">Tenant Placement</a></li>
+      <li class="nav-item-black"><a href="/tenant-rental-application.html">Tenant Rental Application</a></li>
+      <li class="nav-item-black"><a href="/faq.html">FAQ</a></li>
+      <li class="nav-item-black"><a href="/contact.html">Contact Us</a></li>
+      <li class="nav-item-black"><a href="/properties.html">Properties</a></li>
     </ul>
   </nav>
   </div>
