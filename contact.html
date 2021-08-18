@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="tailwind.min.css">
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="vue.js"></script>
         <script src="https://kit.fontawesome.com/f086bec7e5.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
@@ -84,9 +86,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="map-container">
-                    <div id="map" class="w-full h-full"></div>
-                </div>
                 <div id="footer"></div>
             </div>
         </div>
@@ -100,32 +99,6 @@
                 el: '#vue-home',
                 data:{
                     showMenu: false,
-                    map:null,
-                    selectedCat:'dev',
-                    vectorLayer:null,
-                    selectedMarker:{},
-                    mapData:{
-                        data:{
-                            markers:{
-                                mark1:{
-                                    name:'Test Marker',
-                                    image:'',
-                                    rating:0,
-                                    address:'',
-                                    geometry:{
-                                        location:{
-                                            lat:44.080326,
-                                            lng:-79.7811661
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        name:'North Point Realty Inc.',
-                        logo:'assets/logo-black-simple.png',
-                        lat:43.8229972,
-                        lng:-79.3067769
-                    }
                 },
                 methods:{
                     toggleMenu(){
@@ -134,131 +107,9 @@
                     navigateHome(){
                         location.href='/NPRWebsite/'
                     },
-
-                    selectMarker(marker) {
-                        if(Object.keys(this.selectedMarker).length != 0) this.selectedMarker.closeInfoWindow()
-                        let self = this
-                        let found = self.vectorLayer._geoList.find(x => x._coordinates.x == marker.geometry.location.lng && x._coordinates.y == marker.geometry.location.lat)
-                        self.selectedMarker = found
-                        // console.log('marker', marker, this.map, this.vectorLayer)
-                        if(self.selectedMarker) {
-                            self.selectedMarker.openInfoWindow()
-                        }
-                    },
                 },
                 mounted(){
-                    console.log('MOUNTED RAN')
-                    let self = this
-                    let x = this.mapData
-                    this.map = new maptalks.Map('map', {
-						center: [x.lng, x.lat],
-						scrollWheelZoom:false,
-						zoom: 12,
-						zoomControl: {
-							'position'  : 'bottom-right',
-							'slider'    : false,
-							'zoomLevel' : false
-						},
-						minZoom: 12,
-                		maxZoom: 16,
-						baseLayer: new maptalks.TileLayer('base', {
-						'urlTemplate' : `http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png`,
-						'subdomains'  : ['a','b','c','d'],
-						'attribution'  : '&copy; <a href="http://www.osm.org/copyright">OSM</a> contributors, '+
-						'&copy; <a href="https://carto.com/attributions">CARTO</a>',
-						})
-					});
                     
-
-                    // Add markers here
-                    setTimeout(() => {
-                        let list = Object.values(this.mapData.data.markers)
-                        if (this.vectorLayer) this.map.removeLayer(this.vectorLayer);
-                        this.vectorLayer = new maptalks.VectorLayer('vector', {
-                            enableAltitude: true,
-                            drawAltitude: {
-                                lineWidth: 2,
-                                lineColor: '#aaa'
-                            }
-                        }).addTo(self.map);
-                        list.forEach(x => {
-                            let iconUrl = self.mapData.logo
-                            let marker = new maptalks.Marker(
-                                [x.geometry.location.lng, x.geometry.location.lat],
-                                {
-                                    cursor : 'pointer',
-                                    'symbol' : {
-                                        'markerFile'   : iconUrl || '',
-                                        'markerWidth'  : 50,
-                                        'markerHeight' : 50,
-                                        'markerDx'     : 0,
-                                        'markerDy'     : 0,
-                                        'markerOpacity': 1
-                                    }
-                                }
-                            )
-                            marker.addTo(self.vectorLayer)
-                            
-                            marker.setInfoWindow({
-                                'autoCloseOn': 'click',
-                                'single': false,
-                                'width': 383,
-                                'height': 105,
-                                'custom': true,
-                                'dx': 0,
-                                'dy': -20,
-                                'content': `<div class="infobox-content relative">
-                                        <div class="pop_title" style="width: 180px; max-width: 180px; height: 100px; max-height: 100px; overflow: hidden; display: ${!x.image? 'none' : ''}">
-                                            <center>
-                                                <img src="${x.image}" style="width: 100%; height: 100%; display: ${!x.image? 'none' : ''}" />
-                                            </center>
-                                        </div>
-                                        <div style="padding: 10px 20px 0 20px; max-width: 180px;">${x.name}</div>
-                                        <div style="padding: 0 20px 0 20px; display:flex; align-items:center">${!x.rating? '' : `${x.rating} `} ${x.rating == 5? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
-                                        : x.rating > 4 && x.rating < 5? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' 
-                                        : x.rating == 4? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
-                                        : x.rating > 3 && x.rating < 4? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' 
-                                        : x.rating == 3? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
-                                        : x.rating > 2 && x.rating < 3? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>'
-                                        : x.rating == 2? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
-                                        : x.rating > 1 && x.rating < 2? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg> <svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' 
-                                        : x.rating == 1? '<svg xmlns="http://www.w3.org/2000/svg" width="11.125" height="10.648" viewBox="0 0 11.125 10.648"><defs><style>.cls-1 {fill: #fecf5c;}</style></defs><path id="Icon_awesome-star" data-name="Icon awesome-star" class="cls-1" d="M6.407.369,5.049,3.123l-3.038.443A.666.666,0,0,0,1.643,4.7l2.2,2.142-.52,3.025a.665.665,0,0,0,.965.7L7,9.14l2.718,1.429a.666.666,0,0,0,.965-.7l-.52-3.025,2.2-2.142A.666.666,0,0,0,12,3.565L8.958,3.123,7.6.369a.666.666,0,0,0-1.194,0Z" transform="translate(-1.441 0.001)"/></svg>' 
-                                        : x.rating > 0 && x.rating < 1? '<svg xmlns="http://www.w3.org/2000/svg" width="11.507" height="10.649" viewBox="0 0 11.507 10.649"><defs><style>.cls-1 {fill: #fecf5c;}.cls-2 {fill: #e4e7eb;}</style></defs><g id="Group_3334" data-name="Group 3334" transform="translate(-1197.247 -613.678)"><path id="Subtraction_2" data-name="Subtraction 2" class="cls-1" d="M-11291.463-2102.674a.682.682,0,0,1-.513-.241.651.651,0,0,1-.145-.539l.519-3.024-2.2-2.143a.656.656,0,0,1-.169-.678.661.661,0,0,1,.537-.456l3.036-.442,1.36-2.755a.651.651,0,0,1,.595-.37.676.676,0,0,1,.193.028v9.216l-.192-.1-2.719,1.428A.655.655,0,0,1-11291.463-2102.674Z" transform="translate(12491.246 2727)"/><path id="Subtraction_3" data-name="Subtraction 3" class="cls-2" d="M2.536,0a.682.682,0,0,0-.513.241A.651.651,0,0,0,1.879.78L2.4,3.8.2,5.948a.656.656,0,0,0-.169.678.661.661,0,0,0,.537.456l3.036.442,1.36,2.755a.651.651,0,0,0,.595.37.676.676,0,0,0,.193-.028V1.4l-.192.1L2.843.077A.655.655,0,0,0,2.536,0Z" transform="translate(1208.754 624.326) rotate(180)"/></g></svg>' : '' || ''}</div>
-                                        <div style="padding: 0 20px 0 20px; max-width: 180px; font-size:12px">${x.formatted_address ? x.formatted_address : ''}</div>
-                                        <div style="padding: 0 20px 10px 20px;" class="arrow"></div>
-                                        </div>`
-                            });
-                        })
-                        let dev = new maptalks.Marker(
-                            [self.mapData.lng, self.mapData.lat],
-                            {
-                                cursor : 'pointer',
-                                'symbol' : {
-                                    'markerFile'   : self.mapData.logo,
-                                    'markerWidth'  : 60,
-                                    'markerHeight' : 60,
-                                    'markerDx'     : 0,
-                                    'markerDy'     : 0,
-                                    'markerOpacity': 1
-                                }
-                            }
-                        )
-                        dev.addTo(self.vectorLayer)
-
-                        dev.setInfoWindow({
-                            //'autoOpenOn' : 'click',  //set to null if not to open window when clicking on map
-                            'autoCloseOn': 'click',
-                            'single': false,
-                            'width': 383,
-                            'height': 105,
-                            'custom': true,
-                            'dx': 0,
-                            'dy': -20,
-                            'content': `<div class="infobox-content relative">
-                                <div style="padding: 10px 20px; max-width: 180px;">${this.mapData.name || 'Development Location'}</div>
-                                </div>`
-                        });
-                    }, 500)
                 },
                 created(){
 

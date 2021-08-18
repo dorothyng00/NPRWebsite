@@ -8,9 +8,13 @@
         
         <link rel="stylesheet" href="tailwind.min.css">
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="vue.js"></script>
         <script src="https://kit.fontawesome.com/f086bec7e5.js" crossorigin="anonymous"></script>
         <!-- <script src="vue.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
     </head>
     <body>
         <div id="vue-home">
@@ -281,6 +285,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="map-container">
+                    <div id="map" class="w-full h-full"></div>
+                </div>
                 <div id="footer"></div>
             </div>
         </div>
@@ -300,6 +307,7 @@
                     },
                     properties:[
                         {
+                            id:1,
                             image:'assets/properties/condo-placeholder.png',
                             featuredImages:[],
                             type:'Highrise',
@@ -327,9 +335,16 @@
                                 balcony:false,
                                 pets:true,
                             },
+                            geometry:{
+                                location:{
+                                    lat:43.8208053,
+                                    lng:-79.3080709
+                                }
+                            },
                             agreementType:'1 Year',
                         },
                         {
+                            id:2,
                             image:'assets/properties/condo-placeholder.png',
                             featuredImages:[],
                             type:'Highrise',
@@ -357,9 +372,16 @@
                                 balcony:false,
                                 pets:true,
                             },
+                            geometry:{
+                                location:{
+                                    lat:43.7932074,
+                                    lng:-79.2782729
+                                }
+                            },
                             agreementType:'1 Year',
                         },
                         {
+                            id:3,
                             image:'assets/properties/condo-placeholder.png',
                             featuredImages:[],
                             type:'Highrise',
@@ -387,9 +409,16 @@
                                 balcony:false,
                                 pets:true,
                             },
+                            geometry:{
+                                location:{
+                                    lat:43.8073398,
+                                    lng:-79.3201734
+                                }
+                            },
                             agreementType:'1 Year',
                         },
                         {
+                            id:4,
                             image:'assets/properties/condo-placeholder.png',
                             type:'Lowrise',
                             status:'Leased',
@@ -416,9 +445,59 @@
                                 balcony:false,
                                 pets:true,
                             },
+                            geometry:{
+                                location:{
+                                    lat:43.8269954,
+                                    lng:-79.3320957
+                                }
+                            },
                             agreementType:'1 Year',
                         },
-                    ]
+                        {
+                            id:5,
+                            image:'assets/properties/condo-placeholder.png',
+                            type:'Lowrise',
+                            status:'Leased',
+                            address:'215 Queen St E, Brampton, ON L6W 0A9',
+                            price:1895,
+                            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
+                            date:'May 1, 2021',
+                            utilities:{
+                                heat:true,
+                                water:false,
+                                hydro:true,
+                                internet:false
+                            },
+                            features:{
+                                beds:2,
+                                baths:2,
+                                sqft:1200,
+                                parking:1,
+                                garage:0,
+                                exposure:'',
+                                furnished:true,
+                                laundry:false,
+                                dishwasher:true,
+                                balcony:false,
+                                pets:true,
+                            },
+                            geometry:{
+                                location:{
+                                    lat:43.8259954,
+                                    lng:-79.3520957
+                                }
+                            },
+                            agreementType:'1 Year',
+                        },
+                    ],
+                    map:null,
+                    vectorLayer:null,
+                    selectedMarker:{},
+                    mapData:{
+                        logo:'assets/logo-black-simple.png',
+                        lat:43.8229972,
+                        lng:-79.3067769
+                    }
                 },
                 methods:{
                     toggleMenu(){
@@ -435,18 +514,109 @@
                         this.showDetails.property = obj
                         this.showDetails.visible = true
                     },
+                    updateShowDetailsMap(id){
+                        console.log('UPDATE SHOW DETAILS MAP RAN')
+                        let obj = this.properties.find( x => x.id === id)
+                        this.showDetails.property = obj
+                        this.showDetails.visible = true
+                    },
                     formatNumber(num){
                         return num.toLocaleString(`us-EN`);
-                    }
+                    },
+                    selectMarker(marker) {
+                        if(Object.keys(this.selectedMarker).length != 0) this.selectedMarker.closeInfoWindow()
+                        let self = this
+                        let found = self.vectorLayer._geoList.find(x => x._coordinates.x == marker.geometry.location.lng && x._coordinates.y == marker.geometry.location.lat)
+                        self.selectedMarker = found
+                        // console.log('marker', marker, this.map, this.vectorLayer)
+                        if(self.selectedMarker) {
+                            self.selectedMarker.openInfoWindow()
+                        }
+                    },
                 },
                 computed:{
 
                 },
                 mounted(){
+                    console.log('MOUNTED RAN')
+                    let self = this
+                    let x = this.mapData
+                    this.map = new maptalks.Map('map', {
+						center: [x.lng, x.lat],
+						scrollWheelZoom:false,
+						zoom: 12,
+						zoomControl: {
+							'position'  : 'bottom-right',
+							'slider'    : false,
+							'zoomLevel' : false
+						},
+						minZoom: 12,
+                		maxZoom: 16,
+						baseLayer: new maptalks.TileLayer('base', {
+						'urlTemplate' : `http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png`,
+						'subdomains'  : ['a','b','c','d'],
+						'attribution'  : '&copy; <a href="http://www.osm.org/copyright">OSM</a> contributors, '+
+						'&copy; <a href="https://carto.com/attributions">CARTO</a>',
+						})
+					});
+                    
 
+                    // Add markers here
+                    setTimeout(() => {
+                        if (this.vectorLayer) this.map.removeLayer(this.vectorLayer);
+                        this.vectorLayer = new maptalks.VectorLayer('vector', {
+                            enableAltitude: true,
+                            drawAltitude: {
+                                lineWidth: 2,
+                                lineColor: '#aaa'
+                            }
+                        }).addTo(self.map);
+                        this.properties.forEach(x => {
+                            let iconUrl = self.mapData.logo
+                            let marker = new maptalks.Marker(
+                                [x.geometry.location.lng, x.geometry.location.lat],
+                                {
+                                    cursor : 'pointer',
+                                    'symbol' : {
+                                        'markerFile'   : iconUrl || '',
+                                        'markerWidth'  : 40,
+                                        'markerHeight' : 40,
+                                        'markerDx'     : 0,
+                                        'markerDy'     : 0,
+                                        'markerOpacity': 1
+                                    }
+                                }
+                            )
+                            marker.addTo(self.vectorLayer)
+                            
+                            marker.setInfoWindow({
+                                'autoCloseOn': 'click',
+                                'single': false,
+                                'width': 383,
+                                'height': 105,
+                                'custom': true,
+                                'dx': 0,
+                                'dy': -20,
+                                'content': `<div class="infobox-content relative" onclick="updateDetails(${x.id})" style="cursor: pointer;">
+                                        <div class="pop_title" style="width: 180px; max-width: 180px; height: 100px; max-height: 100px; overflow: hidden; display: ${!x.image? 'none' : ''}">
+                                            <center>
+                                                <img src="${x.image}" style="width: 100%; height: 100%; display: ${!x.image? 'none' : ''}" />
+                                            </center>
+                                        </div>
+                                        <div style="padding: 10px 20px 0 20px; max-width: 180px;">${x.address}</div>
+                                        <div style="padding: 0 20px 0 20px; max-width: 180px; font-size:12px">${x.price ? x.price : ''}</div>
+                                        <div style="padding: 0 20px 10px 20px;" class="arrow"></div>
+                                        </div>`
+                            });
+                        })
+                    }, 500)
                 },
                 created(){
-
+                    const vm = this
+                    console.log('VM', vm)
+                    window.updateDetails = function(id) {
+                        vm.updateShowDetailsMap(id)
+                    }
                 }
             })
         </script>
