@@ -251,7 +251,7 @@
                         <h1 class="headerFont xl-font-size">Available Properties</h1>
                         <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 lg:gap-20">
                             <template v-for="(prop,propI) in properties">
-                                <div data-aos="flip-left" @click="updateShowDetails(prop)" class="w-full">
+                                <div data-aos="zoom-in" :data-aos-delay="propI*150" @click="updateShowDetails(prop)" class="w-full">
                                     <div class="img-holder-box relative">
                                         <div class="absolute top-4 left-4 px-3 py-1" style="z-index: 2; border-radius: 5px; user-select: none; cursor: pointer; color: var(--white);" :style="[prop.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
                                             {{prop.status}}
