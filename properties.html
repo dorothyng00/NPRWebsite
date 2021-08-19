@@ -605,14 +605,28 @@
                                 'dx': 0,
                                 'dy': -20,
                                 'content': `<div class="infobox-content relative" onclick="updateDetails(${x.id})" style="cursor: pointer;">
-                                        <div class="pop_title" style="width: 180px; max-width: 180px; height: 100px; max-height: 100px; overflow: hidden; display: ${!x.image? 'none' : ''}">
+                                        <div class="pop_title" style="width: 240px; max-width: 240px; height: 150px; max-height: 150px; overflow: hidden; display: ${!x.image? 'none' : ''}">
                                             <center>
-                                                <img src="${x.image}" style="width: 100%; height: 100%; display: ${!x.image? 'none' : ''}" />
+                                                <img src="${x.image}" style="width: 100%; height: 100%; object-fit: cover; display: ${!x.image? 'none' : ''}" />
                                             </center>
                                         </div>
-                                        <div style="padding: 10px 20px 0 20px; max-width: 180px;">${x.address}</div>
-                                        <div style="padding: 0 20px 0 20px; max-width: 180px; font-size:12px">${x.price ? x.price : ''}</div>
-                                        <div style="padding: 0 20px 10px 20px;" class="arrow"></div>
+                                        <div class="bodyFont" style="padding: 10px 20px 0 20px; max-width: 240px; font-size: 16px;">${x.address}</div>
+                                        <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px; color: var(--darkorange);">${x.price ? `$${x.price.toLocaleString(`us-EN`)}/month` : '$0/month'}</div>
+                                        <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px;">
+                                            <div class="flex items-center bodyFont" style="font-size: 16px;">
+                                                <i class="fas fa-bed" style="color: var(--black);"></i>
+                                                <div class="ml-2">${x.features.beds} Bed(s)</div>
+                                            </div>
+                                            <div class="flex items-center bodyFont" style="font-size: 16px;">
+                                                <i class="fas fa-bath" style="color: var(--black);"></i>
+                                                <div class="ml-2">${x.features.baths} Bath(s)</div>
+                                            </div>
+                                            <div class="flex items-center bodyFont" style="font-size: 16px;">
+                                                <i class="fas fa-ruler-combined" style="color: var(--black);"></i>
+                                                <div class="ml-2">${x.features.sqft.toLocaleString(`us-EN`) + ' Sqft'}</div>
+                                            </div>  
+                                        </div>
+                                        <div style="padding: 0 20px 10px 20px;"></div>
                                         </div>`
                             });
                         })
