@@ -497,7 +497,8 @@
                     vectorLayer:null,
                     selectedMarker:{},
                     mapData:{
-                        logo:'assets/logo-black-simple.png',
+                        availableLogo:'assets/NPR-available.png',
+                        leasedLogo:'assets/NPR-leased.png',
                         lat:43.8229972,
                         lng:-79.3067769
                     }
@@ -575,7 +576,10 @@
                             }
                         }).addTo(self.map);
                         this.properties.forEach(x => {
-                            let iconUrl = self.mapData.logo
+                            let iconUrl = self.mapData.availableLogo
+                            if (x.status == 'Leased'){
+                                iconUrl = self.mapData.leasedLogo
+                            }
                             let marker = new maptalks.Marker(
                                 [x.geometry.location.lng, x.geometry.location.lat],
                                 {
