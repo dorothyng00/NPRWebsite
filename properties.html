@@ -239,7 +239,7 @@
                             <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
                                 <div class="w-full md:w-1/2 text-center md:text-left">
                                     <div data-aos="fade-right" data-aos-delay="500" class="xl-font-size heroHeaderFont">Properties</div>
-                                    <div data-aos="fade-right" data-aos-delay="800" class="sm-font-size bodyFont mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                    <div data-aos="fade-right" data-aos-delay="800" class="sm-font-size bodyFont mt-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +251,7 @@
                         <h1 class="headerFont xl-font-size">Available Properties</h1>
                         <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 lg:gap-20">
                             <template v-for="(prop,propI) in properties">
-                                <div @click="updateShowDetails(prop)" class="w-full">
+                                <div data-aos="flip-left" @click="updateShowDetails(prop)" class="w-full">
                                     <div class="img-holder-box relative">
                                         <div class="absolute top-4 left-4 px-3 py-1" style="z-index: 2; border-radius: 5px; user-select: none; cursor: pointer; color: var(--white);" :style="[prop.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
                                             {{prop.status}}
