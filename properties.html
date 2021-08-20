@@ -257,7 +257,7 @@
                                 <div class="mt-5 grid grid-cols-2 md:grid-cols-5 gap-10 items-end text-center md:text-left w-full">
                                     <div class="w-full" style="color: var(--white)">
                                         <div class="mb-2">Number of Beds</div>
-                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                        <div class="py-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
                                             <select class="filterClass" v-model="selectedBed" style="width:100%; cursor:pointer; background-color: transparent;">
                                                 <option value="any">Any</option>
                                                 <option v-for="(bed,bedI) in beds" :value="bed" :key="bed+bedI">{{bed}} Bed(s)</option>
@@ -266,7 +266,7 @@
                                     </div>
                                     <div class="w-full" style="color: var(--white)">
                                         <div class="mb-2">Number of Baths</div>
-                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                        <div class="py-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
                                             <select class="filterClass" v-model="selectedBath" style="width:100%; cursor:pointer; background-color: transparent;">
                                                 <option value="any">Any</option>
                                                 <option v-for="(bath,bathI) in baths" :value="bath" :key="bath+bathI">{{bath}} Bath(s)</option>
@@ -275,13 +275,13 @@
                                     </div>
                                     <div class="w-full" style="color: var(--white)">
                                         <div class="mb-2">Min Price</div>
-                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                        <div class="py-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
                                             <input v-model="minPrice" class="filterClass w-full" style="background-color: transparent;" type="number"></input>
                                         </div>
                                     </div>
                                     <div class="w-full" style="color: var(--white)">
                                         <div class="mb-2">Max Price</div>
-                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                        <div class="py-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
                                             <input v-model="maxPrice" class="filterClass w-full" style="background-color: transparent;" type="number"></input>
                                         </div>
                                     </div>
