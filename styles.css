@@ -469,7 +469,15 @@ dt.expanded {
         margin-top: 1.25em;
     }
 }
-
+.filterClass:focus-visible {
+    outline: none;
+}
+.filterClass option {
+    background-color: var(--black);
+}
+.filterClass option:hover {
+    background-color: var(--darkorange);
+}
 
 
 /* Main Page */

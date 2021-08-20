@@ -249,16 +249,53 @@
                 <div class="container mx-auto">
                     <div style="padding: 5%;">
                         <!-- Filter -->
-                        <div class="mt-10 md:mt-0 mb-10 md:mb-20">
-                            <div class="w-full md:w-3/4 mx-auto py-5 px-5 bodyFont sm-font-size" style="background-color: var(--darkblue); color: var(--white);">
-                                Filter
+                        <div class="mt-0 mb-10 md:mb-20">
+                            <div class="w-full md:w-3/4 mx-auto py-10 px-10 bodyFont sm-font-size" style="background-color: var(--darkblue);">
+                                <div class="text-center headerFont md-font-size" style="font-weight: bold; color: var(--white);">
+                                    FILTER
+                                </div>
+                                <div class="mt-5 grid grid-cols-2 md:grid-cols-5 gap-10 items-end text-center md:text-left w-full">
+                                    <div class="w-full" style="color: var(--white)">
+                                        <div class="mb-2">Number of Beds</div>
+                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                            <select class="filterClass" v-model="selectedBed" style="width:100%; cursor:pointer; background-color: transparent;">
+                                                <option value="any">Any</option>
+                                                <option v-for="(bed,bedI) in beds" :value="bed" :key="bed+bedI">{{bed}} Bed(s)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="w-full" style="color: var(--white)">
+                                        <div class="mb-2">Number of Baths</div>
+                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                            <select class="filterClass" v-model="selectedBath" style="width:100%; cursor:pointer; background-color: transparent;">
+                                                <option value="any">Any</option>
+                                                <option v-for="(bath,bathI) in baths" :value="bath" :key="bath+bathI">{{bath}} Bath(s)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="w-full" style="color: var(--white)">
+                                        <div class="mb-2">Min Price</div>
+                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                            <input v-model="minPrice" class="filterClass w-full" style="background-color: transparent;" type="number"></input>
+                                        </div>
+                                    </div>
+                                    <div class="w-full" style="color: var(--white)">
+                                        <div class="mb-2">Max Price</div>
+                                        <div class="p-2 flex items-center justify-between" style="border-bottom: 2px solid var(--white);">
+                                            <input v-model="maxPrice" class="filterClass w-full" style="background-color: transparent;" type="number"></input>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center md:justify-end flex-1 col-span-2 md:col-span-1">
+                                        <button @click="runFilter()" class="transparentButton-white px-8 py-3">GO</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <h1 class="headerFont xl-font-size">Available Properties</h1>
                         <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 lg:gap-20">
-                            <template v-for="(prop,propI) in properties">
-                                <div data-aos="zoom-in" :data-aos-delay="propI*50" @click="updateShowDetails(prop)" class="w-full">
+                            <template v-for="(prop,propI) in filteredProperties">
+                                <div data-aos="zoom-in" :data-aos-delay="propI*100" @click="updateShowDetails(prop)" class="w-full">
                                     <div class="img-holder-box relative">
                                         <div class="absolute top-4 left-4 px-3 py-1" style="z-index: 2; border-radius: 5px; user-select: none; cursor: pointer; color: var(--white);" :style="[prop.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
                                             {{prop.status}}
@@ -305,7 +342,7 @@
         <script src="navbar.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
-        
+
         <script>
             new Vue({
                 el: '#vue-home',
@@ -323,7 +360,7 @@
                             type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
-                            price:1895,
+                            price:1595,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
@@ -333,7 +370,7 @@
                                 internet:false
                             },
                             features:{
-                                beds:2,
+                                beds:3,
                                 baths:2,
                                 sqft:600,
                                 parking:1,
@@ -360,7 +397,7 @@
                             type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
-                            price:1895,
+                            price:2595,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
@@ -370,8 +407,8 @@
                                 internet:false
                             },
                             features:{
-                                beds:2,
-                                baths:2,
+                                beds:1,
+                                baths:3,
                                 sqft:600,
                                 parking:1,
                                 garage:0,
@@ -397,7 +434,7 @@
                             type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
-                            price:1895,
+                            price:2000,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
@@ -407,8 +444,8 @@
                                 internet:false
                             },
                             features:{
-                                beds:2,
-                                baths:2,
+                                beds:3,
+                                baths:1,
                                 sqft:600,
                                 parking:1,
                                 garage:0,
@@ -433,7 +470,7 @@
                             type:'Lowrise',
                             status:'Leased',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
-                            price:1895,
+                            price:1500,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
@@ -469,7 +506,7 @@
                             type:'Lowrise',
                             status:'Leased',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
-                            price:1895,
+                            price:1795,
                             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque. Aliquam erat volutpat. Ut sem mauris, consequat et luctus sed, finibus vitae libero. Proin at suscipit ipsum. Nam aliquet enim ex. Quisque at vulputate mi. Praesent fringilla placerat erat in aliquet. Donec gravida mi a tortor fringilla convallis. Cras id mi nisi. Donec vestibulum arcu vel augue suscipit, quis varius lectus egestas. Donec sit amet mi rhoncus erat luctus vestibulum a sed leo.',
                             date:'May 1, 2021',
                             utilities:{
@@ -479,7 +516,7 @@
                                 internet:false
                             },
                             features:{
-                                beds:2,
+                                beds:4,
                                 baths:2,
                                 sqft:1200,
                                 parking:1,
@@ -501,6 +538,12 @@
                         },
                     ],
                     filteredProperties:[],
+                    minPrice:0,
+                    maxPrice:0,
+                    beds:[],
+                    baths:[],
+                    selectedBed:'any',
+                    selectedBath:'any',
                     map:null,
                     vectorLayer:null,
                     selectedMarker:{},
@@ -512,6 +555,86 @@
                     }
                 },
                 methods:{
+                    runFilter(){
+                        console.log('FILTER RAN')
+                        let newArr = []
+                        this.properties.forEach(x => {
+                            if ((x.price >= this.minPrice) && (x.price <= this.maxPrice) && (x.features.beds >= this.selectedBed || this.selectedBed == 'any') && (x.features.baths >= this.selectedBath || this.selectedBath == 'any')){
+                                newArr.push(x)
+                            }
+                        })
+                        this.filteredProperties = newArr
+                        let self = this
+                        setTimeout(() => {
+                            if (this.vectorLayer) this.map.removeLayer(this.vectorLayer);
+                            this.vectorLayer = new maptalks.VectorLayer('vector', {
+                                enableAltitude: true,
+                                drawAltitude: {
+                                    lineWidth: 2,
+                                    lineColor: '#aaa'
+                                }
+                            }).addTo(self.map);
+                            this.filteredProperties.forEach(x => {
+                                let iconUrl = self.mapData.availableLogo
+                                if (x.status == 'Leased'){
+                                    iconUrl = self.mapData.leasedLogo
+                                }
+                                let marker = new maptalks.Marker(
+                                    [x.geometry.location.lng, x.geometry.location.lat],
+                                    {
+                                        cursor : 'pointer',
+                                        'symbol' : {
+                                            'markerFile'   : iconUrl || '',
+                                            'markerWidth'  : 40,
+                                            'markerHeight' : 40,
+                                            'markerDx'     : 0,
+                                            'markerDy'     : 0,
+                                            'markerOpacity': 1
+                                        }
+                                    }
+                                )
+                                marker.addTo(self.vectorLayer)
+                                
+                                marker.setInfoWindow({
+                                    'autoCloseOn': 'click',
+                                    'autoPan': false,
+                                    'single': false,
+                                    'width': 383,
+                                    'height': 105,
+                                    'custom': true,
+                                    'dx': 0,
+                                    'dy': -20,
+                                    'content': `<div class="infobox-content relative" onclick="updateDetails(${x.id})" style="cursor: pointer;">
+                                            <div class="absolute bottom-3 right-3">
+                                                <i class="fas fa-chevron-right" style="font-size: 16px; color: var(--black);"></i>
+                                            </div>
+                                            <div class="pop_title" style="width: 240px; max-width: 240px; height: 150px; max-height: 150px; overflow: hidden; display: ${!x.image? 'none' : ''}">
+                                                <center>
+                                                    <img src="${x.image}" style="width: 100%; height: 100%; object-fit: cover; display: ${!x.image? 'none' : ''}" />
+                                                </center>
+                                            </div>
+                                            <div class="bodyFont" style="padding: 10px 20px 0 20px; max-width: 240px; font-size: 16px;">${x.address}</div>
+                                            <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px; color: var(--darkorange); font-weight: bold;">${x.price ? `$${x.price.toLocaleString(`us-EN`)}/month` : '$0/month'}</div>
+                                            <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px;">
+                                                <div class="flex items-center bodyFont" style="font-size: 16px;">
+                                                    <i class="fas fa-bed" style="color: var(--black);"></i>
+                                                    <div class="ml-2">${x.features.beds} Bed(s)</div>
+                                                </div>
+                                                <div class="flex items-center bodyFont" style="font-size: 16px;">
+                                                    <i class="fas fa-bath" style="color: var(--black);"></i>
+                                                    <div class="ml-2">${x.features.baths} Bath(s)</div>
+                                                </div>
+                                                <div class="flex items-center bodyFont" style="font-size: 16px;">
+                                                    <i class="fas fa-ruler-combined" style="color: var(--black);"></i>
+                                                    <div class="ml-2">${x.features.sqft.toLocaleString(`us-EN`) + ' Sqft'}</div>
+                                                </div>  
+                                            </div>
+                                            <div style="padding: 0 20px 10px 20px;"></div>
+                                            </div>`
+                                });
+                            })
+                        }, 500)
+                    },
                     toggleMenu(){
                         this.showMenu = !this.showMenu
                     },
@@ -583,7 +706,7 @@
                                 lineColor: '#aaa'
                             }
                         }).addTo(self.map);
-                        this.properties.forEach(x => {
+                        this.filteredProperties.forEach(x => {
                             let iconUrl = self.mapData.availableLogo
                             if (x.status == 'Leased'){
                                 iconUrl = self.mapData.leasedLogo
@@ -606,6 +729,7 @@
                             
                             marker.setInfoWindow({
                                 'autoCloseOn': 'click',
+                                'autoPan': false,
                                 'single': false,
                                 'width': 383,
                                 'height': 105,
@@ -622,7 +746,7 @@
                                             </center>
                                         </div>
                                         <div class="bodyFont" style="padding: 10px 20px 0 20px; max-width: 240px; font-size: 16px;">${x.address}</div>
-                                        <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px; color: var(--darkorange);">${x.price ? `$${x.price.toLocaleString(`us-EN`)}/month` : '$0/month'}</div>
+                                        <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px; color: var(--darkorange); font-weight: bold;">${x.price ? `$${x.price.toLocaleString(`us-EN`)}/month` : '$0/month'}</div>
                                         <div class="bodyFont" style="padding: 0 20px 0 20px; max-width: 240px; font-size: 16px;">
                                             <div class="flex items-center bodyFont" style="font-size: 16px;">
                                                 <i class="fas fa-bed" style="color: var(--black);"></i>
@@ -644,6 +768,32 @@
                     }, 500)
                 },
                 created(){
+                    let max = 0
+                    let beds = []
+                    let baths = []
+                    this.properties.forEach(x => {
+                        if (x.price > max){
+                            max = x.price
+                        }
+                        if (!beds.includes(x.features.beds.toString())){
+                            beds.push(x.features.beds.toString())
+                        }
+                        if (!baths.includes(x.features.baths.toString())){
+                            baths.push(x.features.baths.toString())
+                        }
+                    })
+                    this.maxPrice = max
+                    beds.sort((a,b) => {
+						if (a < b) return -1
+                        return 1
+					})
+                    baths.sort((a,b) => {
+						if (a < b) return -1
+                        return 1
+					})
+                    this.beds = beds
+                    this.baths = baths
+                    this.filteredProperties = this.properties
                     const vm = this
                     console.log('VM', vm)
                     window.updateDetails = function(id) {
