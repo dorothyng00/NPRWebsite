@@ -293,7 +293,7 @@
                         </div>
 
                         <div class="md:flex justify-between items-end">
-                            <h1 class="headerFont xl-font-size">Available Properties</h1>
+                            <h1 class="headerFont xl-font-size">All Properties</h1>
                             <div v-if="filterRan" class="bodyFont sm-font-size" style="color: var(--gray);">Search: {{filteredProperties.length}} Result(s)</div>
                         </div>
                         <div class="my-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 lg:gap-20">
@@ -563,13 +563,11 @@
                     runFilter(){
                         console.log('FILTER RAN')
                         this.filterRan = true
-                        let newArr = []
-                        this.properties.forEach(x => {
+                        this.filteredProperties = this.properties.filter(x => {
                             if ((x.price >= this.minPrice) && (x.price <= this.maxPrice) && (x.features.beds >= this.selectedBed || this.selectedBed == 'any') && (x.features.baths >= this.selectedBath || this.selectedBath == 'any')){
-                                newArr.push(x)
+                                return true
                             }
                         })
-                        this.filteredProperties = newArr
                         let self = this
                         setTimeout(() => {
                             if (this.vectorLayer) this.map.removeLayer(this.vectorLayer);
