@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <form id="contact-form" action="https://formspree.io/f/xknkpebz" method="POST">
+                    <form id="contact-form" action="https://formspree.io/f/xknkpebz" method="POST" onsubmit="return false">
                         <div class="mt-8 md:mt-20 w-full bodyFont container mx-auto">
                             <div class="flex justify-center">
                                 <div class="sm:w-2/3 w-full" style="color: var(--black); padding-left: 5%; padding-right: 5%;">
@@ -114,7 +114,7 @@
 
                                     <div class="mt-10 flex justify-center">
                                         <div style="display: inline-block;">
-                                            <button type="submit" class="solidButton px-8 py-3">Submit</button>
+                                            <button type="submit" @click="handleSubmit()" class="solidButton px-8 py-3">SUBMIT</button>
                                         </div>
                                     </div>
 
@@ -132,7 +132,6 @@
         <script>
             AOS.init();
         </script>
-        <script src="form-submit.js"></script>
         <script src="navbar.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
@@ -151,6 +150,35 @@
                     navigateHome(){
                         location.href='/NPRWebsite/'
                     },
+                    handleSubmit(){
+                        let form = document.querySelector('#contact-form')
+                        var status = document.querySelector("#form-status");
+                        let firstName = document.querySelector('input[name=firstName]').value
+                        let lastName = document.querySelector('input[name=lastName]').value
+                        let email = document.querySelector('input[name=email]').value
+                        if (!firstName || !lastName || !email){
+                            console.log('ERROR: Missing first name, last name, or email')
+                        } else {
+                            form.addEventListener("submit", async event => {
+                                event.preventDefault();
+                                var data = new FormData(event.target);
+                                fetch(event.target.action, {
+                                    method: form.method,
+                                    body: data,
+                                    headers: {
+                                        'Accept': 'application/json'
+                                    }
+                                }).then(response => {
+                                    status.innerHTML = "Thanks for your submission!";
+                                    status.classList.add('success')
+                                    form.reset()
+                                }).catch(error => {
+                                    status.innerHTML = "Oops! There was a problem submitting your form."
+                                    status.classList.add('error')
+                                });
+                            })
+                        }
+                    }
                 },
                 mounted(){
                     
