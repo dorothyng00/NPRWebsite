@@ -503,7 +503,7 @@ dt.expanded {
     right: 0;
     bottom: 0;
     top: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
 }
 .hero-img-cover {
     position:absolute;
@@ -620,4 +620,18 @@ dt.expanded {
 }
 .selectFilter:focus-visible {
     outline: none;
+}
+
+
+
+/* Form Classes */
+.form-input {
+    height: 50px;
+    width: 100%;
+    background-color: #F2F2F2;
+    color: var(--black);
+}
+.textarea-input-bg-color {
+    background-color: #F2F2F2;
+    color: var(--black);
 }
