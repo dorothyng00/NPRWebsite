@@ -18,6 +18,7 @@
     </head>
     <body>
         <div id="vue-home">
+            <div v-if="loading" class="loading"></div>
             <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
             <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
                 <div class="hero-img-card relative">
@@ -141,7 +142,8 @@
                 el: '#vue-home',
                 data:{
                     showMenu: false,
-                    currentTab: 'contact'
+                    currentTab: 'contact',
+                    loading: false
                 },
                 methods:{
                     toggleMenu(){
@@ -162,6 +164,7 @@
                             form.addEventListener("submit", async event => {
                                 event.preventDefault();
                                 var data = new FormData(event.target);
+                                this.loading = true
                                 fetch(event.target.action, {
                                     method: form.method,
                                     body: data,
@@ -169,10 +172,12 @@
                                         'Accept': 'application/json'
                                     }
                                 }).then(response => {
+                                    this.loading = false
                                     status.innerHTML = "Thanks for your submission!";
                                     status.classList.add('success')
                                     form.reset()
                                 }).catch(error => {
+                                    this.loading = false
                                     status.innerHTML = "Oops! There was a problem submitting your form."
                                     status.classList.add('error')
                                 });
