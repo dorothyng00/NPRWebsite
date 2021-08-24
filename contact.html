@@ -89,11 +89,6 @@
                         <div class="mt-8 md:mt-20 w-full bodyFont container mx-auto">
                             <div class="flex justify-center">
                                 <div class="sm:w-2/3 w-full" style="color: var(--black); padding-left: 5%; padding-right: 5%;">
-                                    <div class="w-full mx-auto">
-                                        <h1 class="lg-font-size headerFont text-center">
-                                            Form Title
-                                        </h1>
-                                    </div>
                                     <div class="md:grid-cols-2 grid-cols-1 grid gap-8 mt-8">
                                         <div class="form-container">
                                             <div class="mb-2">FIRST NAME *</div>
@@ -105,21 +100,25 @@
                                         </div>
                                         <div class="form-container">
                                             <div class="mb-2">EMAIL *</div>
-                                            <input type="email" name="email" id="email" class="form-input pl-3 pr-3" placeholder="Email" />
+                                            <input type="email" name="email" id="email" class="form-input pl-3 pr-3" placeholder="Email" required />
                                         </div>
                                         <div class="form-container">
                                             <div class="mb-2">PHONE</div>
-                                            <input type="text" name="phone" id="phone" class="form-input pl-3 pr-3" placeholder="Phone" />
+                                            <input type="tel" name="phone" id="phone" class="form-input pl-3 pr-3" placeholder="Phone" />
                                         </div>
                                     </div>
                                     <div class="mt-8">
                                         <div class="mb-2">MESSAGE</div>
                                         <textarea rows="5" name="message" id="message" class="textarea-input-bg-color p-3 w-full" placeholder="Message"></textarea>
                                     </div>
+
                                     <div class="mt-10 flex justify-center">
                                         <div style="display: inline-block;">
                                             <button type="submit" class="solidButton px-8 py-3">Submit</button>
                                         </div>
+                                    </div>
+
+                                    <div id="form-status" class="mt-8 w-full px-8 py-3 text-center" style="color: var(--white);">
                                     </div>
                                 </div>
                             </div>
@@ -133,6 +132,7 @@
         <script>
             AOS.init();
         </script>
+        <script src="form-submit.js"></script>
         <script src="navbar.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
