@@ -76,7 +76,7 @@ html {
   
 .navbar img {
     width: auto;
-    height: 60px;
+    height: 75px;
     object-fit: contain;
     justify-self: start;
     /* margin-left: 25px; */
@@ -159,7 +159,7 @@ html {
         justify-content: space-between;
     }
     .navbar img {
-        height: 40px;
+        height: 50px;
     }
     .navbar ul {
         display: flex;
@@ -451,6 +451,23 @@ dt:not(:first-child) {
     display: none;
     margin: 0;
 }
+.rental-accordion-dropdown dt {
+    background: var(--white);
+    color: var(--black);
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.rental-accordion-dropdown dt svg {
+    float: right;
+    transition: 0.2s;
+    opacity: 0.3;
+}
+.rental-accordion-dropdown dd {
+    display: none;
+    margin: 0;
+}
 
 dt.expanded svg{
     transform: rotate(90deg);
@@ -588,6 +605,21 @@ dt.expanded {
         width: calc(100% - 1px);
         max-width: 100%;
         height: 50vh;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .contact-map-container {
+        width: calc(100% - 1px);
+        max-width: 100%;
+        height: 66vh;
+    }
+}
+@media screen and (max-width: 768px){
+    .contact-map-container {
+        width: calc(100% - 1px);
+        max-width: 100%;
+        height: 40vh;
     }
 }
 
