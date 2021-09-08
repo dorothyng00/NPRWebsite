@@ -48,7 +48,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--darkorange); 
+    background: var(--darkblue); 
 }
 
 
@@ -97,7 +97,7 @@ html {
 }
 
 .nav-item a:hover {
-    color: var(--darkorange);
+    color: var(--darkblue);
 }
 
 .nav-item-black a {
@@ -107,7 +107,7 @@ html {
 }
 
 .nav-item-black a:hover {
-    color: var(--darkorange);
+    color: var(--darkblue);
 }
 
 .menu-toggle .bar{
@@ -476,7 +476,7 @@ dt.expanded {
     background-color: var(--black);
 }
 .filterClass option:hover {
-    background-color: var(--darkorange);
+    background-color: var(--darkblue);
 }
 
 

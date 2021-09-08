@@ -21,18 +21,14 @@
             <div v-if="loading" class="loading"></div>
             <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
             <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
-                <div class="hero-img-card relative">
-                    <div class="absolute w-full h-full" style="z-index: 2; color:white">
-                        <div class="mx-auto container w-full h-full">
-                            <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
-                                <div class="w-full md:w-1/2 text-center md:text-left">
-                                    <div data-aos="fade-right" data-aos-delay="500" class="xl-font-size heroHeaderFont">Contact Us</div>
-                                    <div data-aos="fade-right" data-aos-delay="800" class="sm-font-size bodyFont mt-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                </div>
-                            </div>
+                <div class="container mx-auto">
+                    <div style="padding: 5%;">
+                        <div class="w-full md:w-1/2 py-10">
+                            <h1 class="xl-font-size headerFont" style="color: var(--black);">
+                                Contact Us
+                            </h1>
                         </div>
                     </div>
-                    <img src="assets/toronto4.jpg" class="hero-img-cover" />
                 </div>
                 <div class="md-padding-y">
                     <div class="container mx-auto">
@@ -86,6 +82,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mt-8 md:mt-16 map-container">
+                        <div id="map" class="w-full h-full"></div>
+                    </div>
                     <form id="contact-form" action="https://formspree.io/f/xknkpebz" method="POST" onsubmit="return false">
                         <div class="mt-8 md:mt-20 w-full bodyFont container mx-auto">
                             <div class="flex justify-center">
@@ -133,7 +132,7 @@
         <script>
             AOS.init();
         </script>
-        <script src="navbar.js"></script>
+        <script src="navbar-black.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
         
