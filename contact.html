@@ -18,25 +18,25 @@
     </head>
     <body>
         <div id="vue-home">
-            <div id="nav-bar" class="absolute top-0 left-0 w-full z-50"></div>
-            <div :style="[showMenu ? {'overflow':'hidden', 'max-height':'100vh'} : {'':''}]">
-                <div class="hero-img-card relative">
-                    <div class="absolute w-full h-full" style="z-index: 2; color:white">
-                        <div class="mx-auto container w-full h-full">
-                            <div class="flex items-center w-full h-full" style="padding:0 5%;"> 
-                                <div class="w-full md:w-1/2 text-center md:text-left">
-                                    <div data-aos="fade-right" data-aos-delay="500" class="xl-font-size heroHeaderFont">Contact Us</div>
-                                    <div data-aos="fade-right" data-aos-delay="800" class="sm-font-size bodyFont mt-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                </div>
+            <div v-if="loading" class="loading"></div>
+            <div id="nav-bar"></div>
+            <div class="w-full" :style="[showMenu ? {'overflow':'hidden', 'max-height':'calc(100vh - 100px)'} : {'':''}]">
+                <div class="container mx-auto">
+                    <div style="padding: 5% 5% 0 5%">
+                        <div class="w-full md:w-1/2 py-10 mx-auto text-center">
+                            <h1 class="xl-font-size headerFont" style="color: var(--black);">
+                                Contact Us
+                            </h1>
+                            <div class="mt-3 sm-font-size bodyFont" style="color: #var(--black);">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque.
                             </div>
                         </div>
                     </div>
-                    <img src="assets/toronto4.jpg" class="hero-img-cover" />
                 </div>
                 <div class="md-padding-y">
                     <div class="container mx-auto">
                         <div style="padding-left: 5%; padding-right: 5%;">
-                            <div class="w-full" style="color: var(--black);">
+                            <div class="w-full grid md:grid-cols-3 gap-10 py-10" style="color: var(--black);">
                                 <div class="text-center">
                                     <div class="lg-font-size headerFont" style="font-weight: bold;">
                                         Contact Details
@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-8 md:mt-16 text-center">
+                                <div class="text-center">
                                     <div class="lg-font-size headerFont" style="font-weight: bold;">
                                         Hours of Operation
                                     </div>
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-8 md:mt-16 text-center">
+                                <div class="text-center">
                                     <div class="lg-font-size headerFont" style="font-weight: bold;">
                                         Head Office
                                     </div>
@@ -85,15 +85,13 @@
                             </div>
                         </div>
                     </div>
-                    <form id="contact-form" action="https://formspree.io/f/xknkpebz" method="POST">
+                    <div class="mt-8 md:mt-20 contact-map-container">
+                        <div id="map" class="w-full h-full"></div>
+                    </div>
+                    <form id="contact-form" action="https://formspree.io/f/xknkpebz" method="POST" onsubmit="return false">
                         <div class="mt-8 md:mt-20 w-full bodyFont container mx-auto">
                             <div class="flex justify-center">
                                 <div class="sm:w-2/3 w-full" style="color: var(--black); padding-left: 5%; padding-right: 5%;">
-                                    <div class="w-full mx-auto">
-                                        <h1 class="lg-font-size headerFont text-center">
-                                            Form Title
-                                        </h1>
-                                    </div>
                                     <div class="md:grid-cols-2 grid-cols-1 grid gap-8 mt-8">
                                         <div class="form-container">
                                             <div class="mb-2">FIRST NAME *</div>
@@ -105,21 +103,25 @@
                                         </div>
                                         <div class="form-container">
                                             <div class="mb-2">EMAIL *</div>
-                                            <input type="email" name="email" id="email" class="form-input pl-3 pr-3" placeholder="Email" />
+                                            <input type="email" name="email" id="email" class="form-input pl-3 pr-3" placeholder="Email" required />
                                         </div>
                                         <div class="form-container">
                                             <div class="mb-2">PHONE</div>
-                                            <input type="text" name="phone" id="phone" class="form-input pl-3 pr-3" placeholder="Phone" />
+                                            <input type="tel" name="phone" id="phone" class="form-input pl-3 pr-3" placeholder="Phone" />
                                         </div>
                                     </div>
                                     <div class="mt-8">
                                         <div class="mb-2">MESSAGE</div>
                                         <textarea rows="5" name="message" id="message" class="textarea-input-bg-color p-3 w-full" placeholder="Message"></textarea>
                                     </div>
+
                                     <div class="mt-10 flex justify-center">
                                         <div style="display: inline-block;">
-                                            <button type="submit" class="solidButton px-8 py-3">Submit</button>
+                                            <button type="submit" @click="handleSubmit()" class="solidButton px-8 py-3">SUBMIT</button>
                                         </div>
+                                    </div>
+
+                                    <div id="form-status" class="mt-8 w-full px-8 py-3 text-center" style="color: var(--white);">
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +135,7 @@
         <script>
             AOS.init();
         </script>
-        <script src="navbar.js"></script>
+        <script src="navbar-black.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
         
@@ -142,7 +144,11 @@
                 el: '#vue-home',
                 data:{
                     showMenu: false,
-                    currentTab: 'contact'
+                    currentTab: 'contact',
+                    loading: false,
+                    devLocation: {
+                        logo:'assets/logo-black-simple.png',
+                    }
                 },
                 methods:{
                     toggleMenu(){
@@ -151,9 +157,115 @@
                     navigateHome(){
                         location.href='/NPRWebsite/'
                     },
+                    handleSubmit(){
+                        let form = document.querySelector('#contact-form')
+                        var status = document.querySelector("#form-status");
+                        let firstName = document.querySelector('input[name=firstName]').value
+                        let lastName = document.querySelector('input[name=lastName]').value
+                        let email = document.querySelector('input[name=email]').value
+                        if (!firstName || !lastName || !email){
+                            console.log('ERROR: Missing first name, last name, or email')
+                        } else {
+                            form.addEventListener("submit", async event => {
+                                event.preventDefault();
+                                var data = new FormData(event.target);
+                                this.loading = true
+                                fetch(event.target.action, {
+                                    method: form.method,
+                                    body: data,
+                                    headers: {
+                                        'Accept': 'application/json'
+                                    }
+                                }).then(response => {
+                                    this.loading = false
+                                    status.innerHTML = "Thanks for your submission!";
+                                    status.classList.add('success')
+                                    form.reset()
+                                }).catch(error => {
+                                    this.loading = false
+                                    status.innerHTML = "Oops! There was a problem submitting your form."
+                                    status.classList.add('error')
+                                });
+                            })
+                        }
+                    },
+                    selectMarker(marker) {
+                        if(Object.keys(this.selectedMarker).length != 0) this.selectedMarker.closeInfoWindow()
+                        let self = this
+                        let found = self.vectorLayer._geoList.find(x => x._coordinates.x == marker.geometry.location.lng && x._coordinates.y == marker.geometry.location.lat)
+                        self.selectedMarker = found
+                        // console.log('marker', marker, this.map, this.vectorLayer)
+                        if(self.selectedMarker) {
+                            self.selectedMarker.openInfoWindow()
+                        }
+                    },
                 },
                 mounted(){
+                    console.log('MOUNTED RAN')
+                    let self = this
+                    let x = this.devLocation
+                    this.map = new maptalks.Map('map', {
+						center: [-79.3067769, 43.8229972],
+						scrollWheelZoom:false,
+						zoom: 12,
+						zoomControl: {
+							'position'  : 'bottom-right',
+							'slider'    : false,
+							'zoomLevel' : false
+						},
+						minZoom: 12,
+                		maxZoom: 16,
+						baseLayer: new maptalks.TileLayer('base', {
+						'urlTemplate' : `http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png`,
+						'subdomains'  : ['a','b','c','d'],
+						'attribution'  : '&copy; <a href="http://www.osm.org/copyright">OSM</a> contributors, '+
+						'&copy; <a href="https://carto.com/attributions">CARTO</a>',
+						})
+					});
                     
+
+                    // Add markers here
+                    setTimeout(() => {
+                        if (this.vectorLayer) this.map.removeLayer(this.vectorLayer);
+                        this.vectorLayer = new maptalks.VectorLayer('vector', {
+                            enableAltitude: true,
+                            drawAltitude: {
+                                lineWidth: 2,
+                                lineColor: '#aaa'
+                            }
+                        }).addTo(self.map);
+                        let iconUrl = self.devLocation.logo
+                        let marker = new maptalks.Marker(
+                            [-79.3067769, 43.8229972],
+                            {
+                                cursor : 'pointer',
+                                'symbol' : {
+                                    'markerFile'   : iconUrl || '',
+                                    'markerWidth'  : 40,
+                                    'markerHeight' : 40,
+                                    'markerDx'     : 0,
+                                    'markerDy'     : 0,
+                                    'markerOpacity': 1
+                                }
+                            }
+                        )
+                        marker.addTo(self.vectorLayer)
+                        
+                        marker.setInfoWindow({
+                            'autoCloseOn': 'click',
+                            'autoPan': false,
+                            'single': false,
+                            'width': 383,
+                            'height': 105,
+                            'custom': true,
+                            'dx': 0,
+                            'dy': -20,
+                            'content': `<div class="infobox-content relative">
+                                    <div class="bodyFont" style="padding: 10px 20px 0 20px; max-width: 240px; font-size: 16px;">North Point Realty Inc.</div>
+                                    <div style="padding: 0 20px 10px 20px;"></div>
+                                    </div>`
+                        });
+                    }, 500)
                 },
                 created(){
 
