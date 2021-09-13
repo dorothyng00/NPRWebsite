@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="tailwind.min.css">
         <link rel="stylesheet" href="styles.css">
         <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
         <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
         <script src="vue.js"></script>
         <script src="https://kit.fontawesome.com/f086bec7e5.js" crossorigin="anonymous"></script>
@@ -85,6 +86,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="md-padding-y md-padding-x">
+                    <div class="xl-font-size headerFont text-center">Image Gallery</div>
+                    <div class="md:flex justify-center mt-5">
+                        <div class="sm-font-size bodyFont text-center w-full md:w-1/2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas est risus, feugiat vel metus eu, malesuada dignissim neque.</div>
+                    </div>
+                    <div class="splide__style splide mt-10 lg:mt-20">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                <li class="splide__slide">
+                                    <img src="assets/gallery.jpg" />
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="assets/gallery-2.jpg" />
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="assets/gallery-3.jpg" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div id="footer"></div>
             </div>
         </div>
@@ -95,8 +117,16 @@
         <script src="navbar.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
         
         <script>
+            document.addEventListener( 'DOMContentLoaded', function () {
+                new Splide( '.splide', {
+                    'cover'      : true,
+		            'heightRatio': 0.5,
+                    'type': 'loop'
+                } ).mount();
+            } );    
             new Vue({
                 el: '#vue-home',
                 data:{
