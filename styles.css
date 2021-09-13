@@ -390,6 +390,19 @@ html {
 
 
 /* Button Classes */
+.searchButton-transparent {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid;
+    border-color: var(--white);
+    transition: background-color 0.2s ease-out;
+}
+.searchButton-transparent:hover {
+    color: var(--darkblue);
+    border-color: var(--darkblue);
+    transition: background-color 0.2s ease-out;
+    background-color: white;
+}
 .transparentButton-white {
     background-color: transparent;
     color: var(--white);
@@ -398,8 +411,8 @@ html {
     transition: color 0.2s ease-out;
 }
 .transparentButton-white:hover {
-    color: var(--darkorange);
-    border-color: var(--darkorange);
+    color: var(--darkblue);
+    border-color: var(--darkblue);
     transition: color 0.2s ease-out;
 }
 .transparentButton {
@@ -410,8 +423,8 @@ html {
     transition: color 0.2s ease-out;
 }
 .transparentButton:hover {
-    color: var(--darkorange);
-    border-color: var(--darkorange);
+    color: var(--darkblue);
+    border-color: var(--darkblue);
     transition: color 0.2s ease-out;
 }
 .solidButton {
@@ -420,8 +433,8 @@ html {
     transition: background-color 0.2s ease-out;
 }
 .solidButton:hover {
-    background-color: var(--darkorange);
-    border-color: var(--darkorange);
+    background-color: var(--darkblue);
+    border-color: var(--darkblue);
     transition: background-color 0.2s ease-out;
 }
 
