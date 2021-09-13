@@ -435,7 +435,7 @@ dt:not(:first-child) {
     margin-top: 1.25em;
 }
 .accordion-dropdown dt {
-    background: var(--offwhite);
+    background-color: var(--offwhite);
     color: var(--black);
     user-select: none;
     -webkit-user-select: none;
@@ -452,12 +452,12 @@ dt:not(:first-child) {
     margin: 0;
 }
 .rental-accordion-dropdown dt {
-    background: var(--white);
+    background-color: var(--white);
     color: var(--black);
     user-select: none;
     -webkit-user-select: none;
     cursor: pointer;
-    transition: 0.1s;
+    transition: 0.8s;
 }
 .rental-accordion-dropdown dt svg {
     float: right;
@@ -629,6 +629,20 @@ dt.expanded {
     background: #FFF;
     color: #000;
     border-radius: 5px;
+}
+
+.rental-app-slider {
+    background-image: linear-gradient(90deg,
+        var(--white) 0%,
+        var(--white) 50%,
+        var(--offwhite) 50%,
+        var(--offwhite) 100%);
+    background-size: 200%;
+}
+
+.rental-app-slider:hover {
+    cursor: pointer;
+    background-position: -100% 100%;
 }
 
 
