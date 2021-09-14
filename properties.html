@@ -34,11 +34,17 @@
                             <div class="mt-12 md:mt-0 lg-font-size headerFont" style="color: var(--black); font-weight: bold;">
                                 {{showDetails.property.address}}
                             </div>
-                            <div class="mt-8 propimg-holder-box relative">
-                                <div class="absolute top-4 left-4 px-3 py-1" style="z-index: 2; border-radius: 5px; user-select: none; color: var(--white);" :style="[showDetails.property.status == 'Available' ? {'background-color': 'var(--green)'} : {'background-color': 'var(--red)'}]">
-                                    {{showDetails.property.status}}
+                            <div class="splide__style splide">
+                                <div class="splide__track">
+                                    <ul class="splide__list">
+                                        <li class="splide__slide">
+                                            <img :src="showDetails.property.image" />
+                                        </li>
+                                        <li v-for="(img,imgI) in showDetails.property.featuredImages" class="splide__slide" :key="img+imgI">
+                                            <img :src="img" />
+                                        </li>
+                                    </ul>
                                 </div>
-                                <img class="propimg-cover" :src="showDetails.property.image" />
                             </div>
 
 
@@ -346,6 +352,7 @@
         <script src="footer.js"></script>
         <script src="script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+        
         <script>
             new Vue({
                 el: '#vue-home',
@@ -360,7 +367,11 @@
                         {
                             id:1,
                             image:'assets/properties/1/condo-placeholder.png',
-                            featuredImages:[],
+                            featuredImages:[
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png'
+                            ],
                             type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
@@ -397,7 +408,11 @@
                         {
                             id:2,
                             image:'assets/properties/1/condo-placeholder.png',
-                            featuredImages:[],
+                            featuredImages:[
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png'
+                            ],
                             type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
@@ -434,7 +449,11 @@
                         {
                             id:3,
                             image:'assets/properties/1/condo-placeholder.png',
-                            featuredImages:[],
+                            featuredImages:[
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png'
+                            ],
                             type:'Highrise',
                             status:'Available',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
@@ -471,7 +490,11 @@
                         {
                             id:4,
                             image:'assets/properties/1/condo-placeholder.png',
-                            featuredImages:[],
+                            featuredImages:[
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png'
+                            ],
                             type:'Lowrise',
                             status:'Leased',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
@@ -508,7 +531,11 @@
                         {
                             id:5,
                             image:'assets/properties/1/condo-placeholder.png',
-                            featuredImages:[],
+                            featuredImages:[
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png',
+                                'assets/properties/1/condo-placeholder.png'
+                            ],
                             type:'Lowrise',
                             status:'Leased',
                             address:'215 Queen St E, Brampton, ON L6W 0A9',
@@ -559,7 +586,26 @@
                         lat:43.8229972,
                         lng:-79.3067769
                     },
-                    filterRan:false
+                    filterRan:false,
+                    splideImages:null
+                },
+                watch:{
+                    'showDetails':{
+                        handler(val){
+                            console.log('VAL', val)
+                            if (val.visible){
+                                setTimeout( () => {
+                                    new Splide( '.splide', {
+                                        'cover'      : true,
+                                        'heightRatio': 0.5,
+                                        'type': 'loop'
+                                    } ).mount();
+                                }, 1)
+                                
+                            }
+                        },
+                        deep:true
+                    }
                 },
                 methods:{
                     runFilter(){
