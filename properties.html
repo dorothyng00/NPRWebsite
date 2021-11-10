@@ -8,13 +8,13 @@
         
         <link rel="stylesheet" href="tailwind.min.css">
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
-        <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
-        <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+        <link rel="stylesheet" href="maptalks.css">
+        <link href="aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="splide.css">
+        <script src="aos.js"></script>
         <script src="vue.js"></script>
         <script src="https://kit.fontawesome.com/f086bec7e5.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
+        <script src="maptalks.js"></script>
     </head>
     <body>
         <div id="vue-home">
@@ -56,7 +56,7 @@
                                     <div class="xl:ml-8 md:flex mt-2 ml-0">
                                         <div class="flex items-center justify-center md:justify-left" style="color: var(--white);">
                                             <i class="fas fa-bed md-font-size"></i>
-                                            <div class="ml-2">{{showDetails.property.features.beds}}<span v-if="showDetails.property.features.beds > 1"> Beds</span><span v-else> Bed</span></div>
+                                            <div class="ml-2">{{showDetails.property.features.beds}}<span v-if="showDetails.property.features.beds > 1"> Beds</span><span v-else> Bed</span><span v-if="showDetails.property.features.den"> + Den</span></div>
                                         </div>
                                         <div class="md:ml-3 flex items-center justify-center md:justify-left" style="color: var(--white);">
                                             <i class="fas fa-bath md-font-size"></i>
@@ -320,7 +320,7 @@
                                         <div class="md:flex mt-2">
                                             <div class="flex items-center">
                                                 <i class="fas fa-bed md-font-size" style="color: var(--black);"></i>
-                                                <div class="ml-2">{{prop.features.beds}}<span v-if="prop.features.beds > 1"> Beds</span><span v-else> Bed</span></div>
+                                                <div class="ml-2">{{prop.features.beds}}<span v-if="prop.features.beds > 1"> Beds</span><span v-else> Bed</span><span v-if="prop.features.den"> + Den</span></div>
                                             </div>
                                             <div class="md:ml-3 flex items-center">
                                                 <i class="fas fa-bath md-font-size" style="color: var(--black);"></i>
@@ -351,7 +351,7 @@
         <script src="navbar.js"></script>
         <script src="footer.js"></script>
         <script src="script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+        <script src="splide.js"></script>
         
         <script>
             new Vue({
@@ -363,6 +363,8 @@
                         visible:false,
                         property:{}
                     },
+
+
                     properties:[
                         {
                             id:1,
@@ -396,6 +398,7 @@
                                 dishwasher:false,
                                 balcony:false,
                                 pets:false,
+                                den:true,
                             },
                             geometry:{
                                 location:{
@@ -414,7 +417,7 @@
                                 'assets/properties/1/condo-placeholder.png'
                             ],
                             type:'Highrise',
-                            status:'Leased',
+                            status:'Available',
                             address:'66 Forest Manor, Toronto, ON M2J 0B7',
                             price:1800,
                             description:"Beautiful 1 bedroom & 1 washroom Condo Available for Rent. Conveniently Located off Hwy 401 and 404/DVP near Fairview mall and Don Mills Station, this unit is perfect for any professional individual/couple and family! Close to Public Transportation, many Restaurants and Shops just steps away. Come take a look at the unit yourself!",
@@ -436,7 +439,8 @@
                                 laundry:false,
                                 dishwasher:false,
                                 balcony:false,
-                                pets:false,
+                                pets:true,
+                                den:false,
                             },
                             geometry:{
                                 location:{
@@ -478,6 +482,7 @@
                                 dishwasher:false,
                                 balcony:false,
                                 pets:false,
+                                den:false,
                             },
                             geometry:{
                                 location:{
@@ -519,6 +524,7 @@
                                 dishwasher:false,
                                 balcony:false,
                                 pets:false,
+                                den:true,
                             },
                             geometry:{
                                 location:{
@@ -560,6 +566,7 @@
                                 dishwasher:true,
                                 balcony:false,
                                 pets:true,
+                                den:false,
                             },
                             geometry:{
                                 location:{
@@ -570,6 +577,9 @@
                             agreementType:'1 Year',
                         },
                     ],
+
+
+
                     filteredProperties:[],
                     minPrice:0,
                     maxPrice:0,
