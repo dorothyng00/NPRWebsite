@@ -17,7 +17,7 @@ navbar.innerHTML = `
           <span class="bar" :style="[showMenu ? {'background-color':'#000'} : {'':''}]"></span>
         </div>
       </div>
-      <li class="nav-item"><a href="/NPRWebsite" :style="[currentTab == 'home' ? {'color':'var(--darkblue)'} : {'':''}]">Home</a></li>
+      <li class="nav-item"><a href="/" :style="[currentTab == 'home' ? {'color':'var(--darkblue)'} : {'':''}]">Home</a></li>
       <li class="nav-item"><a href="/property-management" :style="[currentTab == 'property-management' ? {'color':'var(--darkblue)'} : {'':''}]">Property Management</a></li>
       <li class="nav-item"><a href="/tenant-placement" :style="[currentTab == 'tenant-placement' ? {'color':'var(--darkblue)'} : {'':''}]">Tenant Placement</a></li>
       <li class="nav-item"><a href="/tenant-rental-application" :style="[currentTab == 'tenant-rental-application' ? {'color':'var(--darkblue)'} : {'':''}]">Tenant Rental Application</a></li>
