@@ -21,14 +21,14 @@ footer.innerHTML = `
                         <div class="text-center md:text-left md-font-size bodyFont mb-2">Navigate</div>
                         <div class="text-center md:text-left xs-font-size bodyFont md:flex">
                             <div>
-                                <div><a href="/NPRWebsite/property-management">Property Management</a></div>
-                                <div><a href="/NPRWebsite/tenant-placement">Tenant Placement</a></div>
-                                <div><a href="/NPRWebsite/tenant-rental-application">Tenant Rental Application</a></div>
+                                <div><a href="/property-management">Property Management</a></div>
+                                <div><a href="/tenant-placement">Tenant Placement</a></div>
+                                <div><a href="/tenant-rental-application">Tenant Rental Application</a></div>
                             </div>
                             <div class="md:ml-10">
-                                <div><a href="/NPRWebsite/faq">FAQ</a></div>
-                                <div><a href="/NPRWebsite/contact">Contact Us</a></div>
-                                <div><a href="/NPRWebsite/properties">Properties</a></div>
+                                <div><a href="/faq">FAQ</a></div>
+                                <div><a href="/contact">Contact Us</a></div>
+                                <div><a href="/properties">Properties</a></div>
                             </div>
                         </div>
                     </div>
