@@ -31,14 +31,14 @@
         
                         <div class="faq-tab-content my-10">
                             <dl class="accordion-dropdown bodyFont" style="color: var(--black);">
-                                <template v-for="(faq,faqI) in faqItems">
-                                    <dt data-aos="fade-right" :data-aos-delay="faqI*50" class="flex px-5 py-4 sm-font-size" :key="faq+faqI">
+                                <div v-for="(faq,faqI) in faqItems" data-aos="fade-right" :data-aos-delay="faqI*50" :key="faq+faqI">
+                                    <dt class="flex px-5 py-4 sm-font-size">
                                         <div class="flex-1">{{faq.header}}</div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </dt>
                                     <dd class="p-5 sm-font-size" :key="faq+faqI+1" v-html="faq.body">
                                     </dd>
-                                </template>
+                                </div>
                             </dl>
                         </div>
                     </div>

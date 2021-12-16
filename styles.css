@@ -451,7 +451,7 @@ html {
 .faq-tabs-section .faq-tabs:not(:first-child) {
     margin-left: 2em;
 }
-dt:not(:first-child) {
+dl > div:not(:first-child) {
     margin-top: 1.25em;
 }
 .accordion-dropdown dt {
